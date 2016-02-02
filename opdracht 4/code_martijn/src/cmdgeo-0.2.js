@@ -1,6 +1,6 @@
 //      cmdgeo-0.2.js
 //      http://cmdgeo.nl
-//      J.P. Sturkenboom <j.p.sturkenboom@hva.nl>
+//      J.P. Sturkenboom <j.p.sturkenboom@hva.nl> || Edited by Martijn Nieuwenhuizen 
 //      Copyleft 2013, all wrongs reversed.
 
 (function() {
