@@ -1,0 +1,45 @@
+/* NAV */
+body > header {
+
+}
+header nav {
+
+}
+nav ul {
+
+}
+nav ul li {
+	
+}
+nav ul a {
+
+}
+	
+
+/* BODY */
+body {
+	margin: 0;
+	padding: 0;
+}
+main {
+	display: flex;
+	flex-flow: column wrap;
+}
+main section {
+	width: 100%;
+}
+#start {
+
+}
+#best-practices {
+
+}
+
+
+/* FOOTER */
+footer {
+
+}
+footer p {
+		
+}

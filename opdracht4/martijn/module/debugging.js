@@ -1,4 +1,4 @@
-debugging = function(options) {
+var debugging = function(options) {
 
 	// set vars to the good scope
 	var _this = this;

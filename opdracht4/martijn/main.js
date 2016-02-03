@@ -6,11 +6,11 @@
 
 	// require extern library
 	var eventTarget = require('./lib//eventTarget');
-	// make every _eventTarget a new eventTarget
-	var _eventTarget = new eventTarget();
+	// make every et a new eventTarget
+	var et = new EventTarget();
 
 	var debugging = require('./module/debugging');
-	// make every _eventTarget a new eventTarget
+	// make every et a new eventTarget
 	var _debugging = new debugging();
 
 	// set all var's to false
@@ -37,10 +37,10 @@
 
 		debug_message("Controleer of GPS beschikbaar is...");
 
-		_eventTarget.addListener(constants.GPS_AVAILABLE, map.startInterval);
-		_eventTarget.addListener(constants.GPS_UNAVAILABLE, function(){debug_message('GPS is niet beschikbaar.')});
+		et.addListener(constants.GPS_AVAILABLE, map.startInterval);
+		et.addListener(constants.GPS_UNAVAILABLE, function(){debug_message('GPS is niet beschikbaar.')});
 
-		(geo_position_js.init())?_eventTarget.fire(GPS_AVAILABLE):_eventTarget.fire(constants.GPS_UNAVAILABLE);
+		(geo_position_js.init())?et.fire(GPS_AVAILABLE):et.fire(constants.GPS_UNAVAILABLE);
 
 	}
 
@@ -50,7 +50,7 @@
 	    debug_message("GPS is beschikbaar, vraag positie.");
 	    updatePosition();
 	    interval = self.setInterval(updatePosition, REFRESH_RATE);
-	    _eventTarget.addListener(POSITION_UPDATED, monitorLocations);
+	    et.addListener(POSITION_UPDATED, monitorLocations);
 
 	}
 
@@ -66,7 +66,7 @@
 	map.prototype.setPosition = function(position){
 
 	    currentPosition = position;
-	    _eventTarget.fire(constants.POSITION_UPDATED);
+	    et.fire(constants.POSITION_UPDATED);
 	    debug_message(intervalCounter+" positie lat:"+position.coords.latitude+" long:"+position.coords.longitude);
 
 	}
@@ -163,7 +163,7 @@
 	    });
 
 	    // Zorg dat de kaart geupdated wordt als het POSITION_UPDATED event afgevuurd wordt
-	    _eventTarget.addListener(constants.POSITION_UPDATED, setNewPosition);
+	    et.addListener(constants.POSITION_UPDATED, setNewPosition);
 	}
 
 	map.prototype.isNumber = function(n) {

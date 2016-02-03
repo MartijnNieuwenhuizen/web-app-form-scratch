@@ -1,11 +1,11 @@
-function eventTarget() {
+function EventTarget() {
 
     var _this = this;
     _this._listeners = {};
 
 }
 
-eventTarget.prototype = {
+EventTarget.prototype = {
 
     constructor: EventTarget,
     addListener: function(a,c) {
