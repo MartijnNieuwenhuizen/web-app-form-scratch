@@ -2,16 +2,14 @@
 
 	'Use Strict';
 
-	var gps = {};
-
 	// require extern library
 	var eventTarget = require('./lib//eventTarget');
 	// make every et a new eventTarget
 	var et = new EventTarget();
 
-	var debugging = require('./module/debugging');
+	var Debugging = require('./module/debugging');
 	// make every et a new eventTarget
-	var _debugging = new debugging();
+	var _Debugging = new Debugging();
 
 	// set all var's to false
 	var currentPosition = currentPositionMarker = customDebugging = debugId = map = interval = intervalCounter = updateMap = false;
@@ -33,11 +31,11 @@
 	// Prototype every funtion so it can be used multiple times without overwrithing something
 
 	// Test of GPS beschikbaar is (via geo.js) en vuur een event af
-	map.prototype.testGPS = function() {
+	Map.prototype.testGPS = function() {
 
 		debug_message("Controleer of GPS beschikbaar is...");
 
-		et.addListener(constants.GPS_AVAILABLE, map.startInterval);
+		et.addListener(constants.GPS_AVAILABLE, Map.startInterval);
 		et.addListener(constants.GPS_UNAVAILABLE, function(){debug_message('GPS is niet beschikbaar.')});
 
 		(geo_position_js.init())?et.fire(GPS_AVAILABLE):et.fire(constants.GPS_UNAVAILABLE);
@@ -45,7 +43,7 @@
 	}
 
 	// Start een interval welke op basis van REFRESH_RATE de positie updated
-	map.prototype.startInterval = function(event){
+	Map.prototype.startInterval = function(event){
 
 	    debug_message("GPS is beschikbaar, vraag positie.");
 	    updatePosition();
@@ -55,7 +53,7 @@
 	}
 
 	// Vraag de huidige positie aan geo.js, stel een callback in voor het resultaat
-	map.prototype.updatePosition = function(){
+	Map.prototype.updatePosition = function(){
 
 	    intervalCounter ++;
 	    geo_position_js.getCurrentPosition(setPosition, _geo_error_handler, {enableHighAccuracy:true});
@@ -63,7 +61,7 @@
 	}
 
 	// Callback functie voor het instellen van de huidige positie, vuurt een event af
-	map.prototype.setPosition = function(position){
+	Map.prototype.setPosition = function(position){
 
 	    currentPosition = position;
 	    et.fire(constants.POSITION_UPDATED);
@@ -72,7 +70,7 @@
 	}
 
 	// Controleer de locaties en verwijs naar een andere pagina als we op een locatie zijn
-	map.prototype.monitorLocations = function(event){
+	Map.prototype.monitorLocations = function(event){
 	    // Liefst buiten google maps om... maar helaas, ze hebben alle coole functies
 	    for (var i = 0; i < locaties.length; i++) {
 	        var locatie = {coords:{latitude: locaties[i][3],longitude: locaties[i][4]}};
@@ -98,7 +96,7 @@
 	}
 
 	// Bereken het verchil in meters tussen twee punten
-	map.prototype.calculateDistance = function(p1, p2){
+	Map.prototype.calculateDistance = function(p1, p2){
 
 	    var pos1 = new google.maps.LatLng(p1.coords.latitude, p1.coords.longitude);
 	    var pos2 = new google.maps.LatLng(p2.coords.latitude, p2.coords.longitude);
@@ -106,7 +104,7 @@
 
 	}
 
-	map.prototype.generateMap = function(myOptions, canvasId){
+	Map.prototype.generateMap = function(myOptions, canvasId){
 
 	    debug_message("Genereer een Google Maps kaart en toon deze in #"+canvasId)
 	    map = new google.maps.Map(document.getElementById(canvasId), myOptions);
@@ -166,24 +164,24 @@
 	    et.addListener(constants.POSITION_UPDATED, setNewPosition);
 	}
 
-	map.prototype.isNumber = function(n) {
+	Map.prototype.isNumber = function(n) {
 	  
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 
 	}
 
 	// Update de positie van de gebruiker op de kaart
-	map.prototype.setNewPosition = function(event){
+	Map.prototype.setNewPosition = function(event){
 
 	    // use currentPosition to center the map
 	    var newPos = new google.maps.LatLng(currentPosition.coords.latitude, currentPosition.coords.longitude);
-	    map.setCenter(newPos);
+	    Map.setCenter(newPos);
 	    currentPositionMarker.setPosition(newPos);
 
 	}
 
 	// Call the debuggin functions
-	debuggin();
+	Debugging();
 
 })();
 
