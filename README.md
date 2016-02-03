@@ -48,7 +48,7 @@ Maar terug naar de voordelen, omdat alles modulair gebrouwd wordt is het mogenli
 **Opdracht 4**
 ## Code shown in folder opdracht 4
 In deze opdracht is de code van justus verbeterd qua structuur. Er zitten twee mappen in deze folder, als eerst 'justus', dit is de originele code en als laatst 'martijn', dit is de code door mij verbeterd. 
-⋅⋅ Het bestand is opgedeeld in verschillende onderdelen. 
+Het bestand is opgedeeld in verschillende onderdelen. 
 * lib -> hierin zit de library die gebruikt wordt
 * module -> hierin zit de debuggin module en een map voor de googlemaps(hierin wil ik later de google maps basis zetten)
 Deze onderdelen worden door module.exports & require ingeladen in de main.js
@@ -60,5 +60,11 @@ In de main.js is voor de map function de prototype methode gebruikt zodat het mo
 In opdracht 5 wordt de basis van mijn eiegen Single Page Web Application opgezet.
 Op JS gebied wordt de app, routes & sections opgezet. Daarnaast worden de secties met 'hashchange' getoggled.
 In main-old.js zijn i.p.v. objecten, constructoren gebruikt. Dit is voor deze elementen te overdreven maar bewaard gebleven voor de aankomende opdrachten.
+
+**Werking:**
+* Er wordt bij een 'onhashchange' event gekeken naar de huidige hash van de URL
+* Deze hash wordt gebruikt om de bijpassende template te vinden in de html
+* Als deze template bestaat, wordt hij ingeladen in de HTML van de main. Bestaat hij niet, wordt er een error template ingeladen
+* Als je voor de eerste keer op de site komt, dus op de '/', wordt de hash veranderd daar #home (de homepage)
 
 
