@@ -73,6 +73,13 @@ main section {
 
 }
 
+.template {
+	display: none;
+}
+
+main .template {
+	display: block;
+}
 
 /* FOOTER */
 footer {
