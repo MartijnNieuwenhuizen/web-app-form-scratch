@@ -1,3 +1,15 @@
+/*
+
+COLORS USAGE
+
+hsl(33, 56%, 84%);
+hsl(107, 20%, 81%);
+hsl(203, 15%, 70%);
+hsl(22, 52%, 32%);
+
+*/
+
+
 /* Default */
 	/* Typography */
 * {
@@ -19,8 +31,11 @@ p {
 a {
 	font-size: 1rem;
 	color: inherit;
-	/*text-decoration: none;
-	Add a better style than underline*/
+	text-decoration: none;
+}
+li a:hover {
+	background-color: hsl(0, 0%, 80%);
+	border-radius: 1em;
 }
 h1, h2, h3, p, a, li {
 	line-height: 1.7;
@@ -37,10 +52,21 @@ li {
 
 /* NAV */
 body > header {
-
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: space-between;
+	background-color: hsl(107, 20%, 81%);
+}
+header h1 {
+	padding-left: .5em;
 }
 header nav {
-
+	padding-right: 1em;	
+}
+header h1 a {
+	font-size: 2.369rem;
+	color: hsl(0, 0%, 30%);
 }
 nav ul {
 
@@ -48,9 +74,13 @@ nav ul {
 nav ul li {
 	padding: 0;
 	display: inline-block;
+	margin: .5em;
 }
 nav ul a {
 	padding: .5em 1em;
+	background-color: hsl(0, 0%, 95%);
+	border-radius: 1em;
+	color: hsl(0, 0%, 30%);
 }
 	
 
@@ -62,6 +92,9 @@ body {
 main {
 	display: flex;
 	flex-flow: column wrap;
+	padding: 1em;
+	background-color: hsl(0, 0%, 90%);
+	min-height: 69vh;
 }
 main section {
 	width: 100%;
@@ -84,6 +117,8 @@ main .template {
 /* FOOTER */
 footer {
 	width: 100%;
+	margin-top: -1em;
+	background-color: hsl(107, 20%, 81%);
 }
 footer p {
 	text-align: center;
