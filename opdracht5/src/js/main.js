@@ -4,6 +4,14 @@
 
 	var main = document.querySelector('main');
 
+	// Hide all templates (instead of using css)
+	var templates = document.querySelectorAll('.template');
+	for ( var i = 0; i < templates.length; i++ ) {
+
+		templates[i].className = 'hide';
+
+	}
+
 	var app = {
 		init: function() {
 
@@ -25,10 +33,11 @@
 	}
 
 	var sections = {
-		toggle: function() {
+		toggle: function(e) {
 
 			// Get the hash of the current url after click
-			var url = window.location.hash;
+			// var url = window.location.hash; (this is the old syntax, now useing the event);
+			var url = e.currentTarget.location.hash;
 
 			// If the url has a hash
 			if ( url ) {
