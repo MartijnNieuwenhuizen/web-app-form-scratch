@@ -34,7 +34,10 @@ a {
 	font-weight: 100;
 }
 a:hover {
-
+	background-color: rgba(82, 185, 233, 1);
+}
+a.active {
+	background-color: rgba(82, 185, 233, 1);
 }
 
 h1, h2, h3, p, a, li {
@@ -61,8 +64,8 @@ header {
 }
 header a {
 	align-self: flex-end;
-	padding: .5em;
-	margin: .5em;
+	padding: .3em .8em;
+	margin: .7em;
 	margin-left: auto;
 }
 
@@ -97,15 +100,6 @@ ul li a {
 	padding: .5em .7em;
 	width: 100%;
 	display: block;
-}
-ul li a:hover {
-	padding: .5em .7em;
-	width: 100%;
-	display: block;
-	background-color: rgba(82, 185, 233, 1);
-}
-.active {
-	background-color: rgba(82, 185, 233, 1);
 }
 
 /* BODY */
