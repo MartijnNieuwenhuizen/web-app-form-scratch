@@ -1,20 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Single Page Web App</title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="./src/css/style.css">
 </head>
 <body>
 
 	<header>
-		<h1></h1>
+		<a href="">Sounds Of The City</a>
 	</header>
 
+	<aside>
+		<nav>
+			<ul>
+				<li><a href="#all">All</a></li>
+				<li><a href="#amsterdam">Amsterdam</a></li>
+				<li><a href="#berlin">Berlin</a></li>
+				<li><a href="#london">London</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+
 	<main>
-		<p></p>
+		<section class="template" id="city">
+			<h1>{{ placeName }}</h1>
+			<ul>
+				<li>
+					<h1>{{ title }}</h1>
+
+					<p>{{ discription }}</p>
+					<span>{{ genre }}</span>
+				</li>
+			</ul>
+		</section>
+
 	</main>
+
+	<section class="template" id="error">
+		<h1>Sorry, this page doesn't exists</h1>
+	</section>
 	
-	<!-- <script src="//connect.soundcloud.com/sdk.js"></script> -->
 	<script src="./src/js/nanoajax.min.js"></script>
+	<script src="./src/js/routie.min.js"></script>
+	<!-- <script src="./src/js/mustache.min.js"></script> -->
+	<script src="./src/js/handlebars-v4.0.5.js"></script>
 	<script src="./src/js/script.js"></script>
 
 </body>

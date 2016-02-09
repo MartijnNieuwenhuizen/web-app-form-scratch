@@ -1,104 +1,134 @@
-var sc = {
-	BaseUrl: "https://api.soundcloud.com",
-	tracks: "tracks?client_id=2fda30f3c5a939525422f47c385564ae",
-	users: "users?client_id=2fda30f3c5a939525422f47c385564ae"
-}
+// Add the iifi
+(function() {
+	'use strict';
 
+	// init Templating
+	var main = document.querySelector('main');
+	var cityTemplate = document.querySelector('#city');
+	var source = document.querySelector('#city');
 
+	// Hide error template
+	var errorTemplate = document.querySelector('#error');
+	errorTemplate.classList.add('hide');
 
-nanoajax.ajax({url: sc.BaseUrl + '/' + sc.tracks}, function(amount, data) {
-	
-	// console.log(data, id);
-	var _data = JSON.parse(data);
+	var app = {
+		init: function() {
 
-	console.log(_data[45].title);
+			// call the routes.init
+			routes.init();
 
-	var parg = document.querySelector('main p');
-	// console.log(parg);
-	var title = _data[45].title;
-	parg.innerHTML = title;
+		}
+	}
 
-});
+	var routes = {
+		init: function() {
 
+			// routers for all the elements on the page
+			routie({
+				'all': function() {
+			    	var placeName = "All places";
+			    	soundcloud.init(placeName);
+			    },
+			    'amsterdam': function() {
+			    	var placeName = "Amsterdam";
+			    	soundcloud.init(placeName);
+			    },
+			    'berlin': function() {
+			    	var placeName = "Berlin";
+			    	soundcloud.init(placeName);
+			    },
+			    'london': function() {
+			    	var placeName = "London";
+			    	soundcloud.init(placeName);
+			    }
+			});
 
+		}
+	}
 
-// SDK
-// SC.initialize({
-// 	client_id: '8b70bc40bde9cefe74fd08bb12bac86c',
-// 	max-
-// });
+	// var places = {
+	// 	all: function() {
 
-// SC.get('/tracks', function(tracks){
-// 	console.log(tracks);
-// });
+	// 		var placeName = "All places";
+	// 		soundcloud.init(placeName);
 
-// SC.get('/tracks', { genres: 'dance' }, function(tracks) {
-// 	console.dir(tracks);
-// });
+	// 	},
+	// 	amsterdam: function() {
 
+	// 		var placeName = "Amsterdam";
+	// 		soundcloud.init(placeName);
 
+	// 	},
+	// 	berlin: function() {
 
-// // Add the iifi
-// (function() {
-// 	'use strict';
+	// 		var placeName = "Berlin";
+	// 		soundcloud.init(placeName);
 
-// 	var app = {
-// 		init: function() {
+	// 	},
+	// 	london: function() {
 
-// 			// call the routes.init
-// 			twitter.init();
+	// 		var placeName = "London";
+	// 		soundcloud.init(placeName);
 
-// 		}
-// 	}
-	
-// 	// naming idea from Rover van Nispen
-// 	var twitter = {
-// 		init: function() {
+	// 	}
+	// }
 
-// 			console.log("Foo");
+	var soundcloud = {
+		init: function(placeName) {
 
-// 		}
-// 	}
+			// soundcloud url data
+			var sc = {
+				BaseUrl: "https://api.soundcloud.com",
+				tracks: "tracks?client_id=2fda30f3c5a939525422f47c385564ae",
+				users: "users?client_id=2fda30f3c5a939525422f47c385564ae"
+			}
 
-// 	var sections = {
-// 		toggle: function(e) {
-
-// 			// Get the hash of the current url after click
-// 			// var url = window.location.hash; (this is the old syntax, now useing the event);
-// 			var url = e.currentTarget.location.hash;
-
-// 			// If the url has a hash
-// 			if ( url ) {
-
-// 				//NOTE: Got the templateing idea from Dylan Vens
-
-// 				// Get the template that matches the url
-// 				var matchingTemplate = document.querySelector(url);
-
-// 				// If this templates exists
-// 				if ( matchingTemplate ) {
-
-// 					// Get the content from the matching template and use that content in the main html
-// 					main.innerHTML = matchingTemplate.innerHTML;
-
-// 				} else {
-
-// 					// If the template doesn't exists: load the error template
-// 					main.innerHTML = document.querySelector('#error').innerHTML;
-
-// 				}
-
-// 			} else {
+			nanoajax.ajax({url: sc.BaseUrl + '/' + sc.tracks}, function(amount, data) {
 				
-// 				// If the url has no hash(so this is home) -> set the hash to start
-// 				window.location.hash = '#home';
+				// Get / Store data
+				var data = JSON.parse(data);
 
-// 			} 
+				var templateContent = {
+					placeName: placeName,
+				    title: data[4].title,
+				    imgUrl: data[4].artwork_url,
+				    discription: data[4].discription,
+				    genre: data[4].genre
+				};
 
-// 		}
-// 	}
+				template.init(templateContent);
 
-// 	// start the main app
-// 	app.init();
+			});
 
-// })();
+		}
+	}
+
+	var template = {
+		init: function(templateContent) {
+
+			var templateContent = templateContent;
+
+			// Handlebars templateing
+			var innerSource = source.innerHTML;
+			var template = Handlebars.compile(innerSource);
+
+			var context = {
+				placeName: templateContent.placeName,
+				title: templateContent.title,
+				discription: templateContent.discription,
+				genre: templateContent.genre
+			}
+
+			var html = template(context);
+
+			// source.innerHTML = html;
+
+			console.log(source);
+
+		}
+	}
+
+	// start the main app
+	app.init();
+
+})();
