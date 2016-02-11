@@ -26,7 +26,7 @@ h3 {
 }
 p {
 	font-size: 1em;
-	padding: 1em;
+	padding: .3em 1em;
 }
 a {
 	color: white;
@@ -50,7 +50,7 @@ ul {
 	margin-left: 1em;
 }
 li {
-	list-style-type: square;
+	list-style-type: none;
 }
 
 /* HEADER */
@@ -133,7 +133,61 @@ footer p {
 }
 
 
+/*
+
+SOUNDCLOUD
+
+*/
+.song-overview {
+
+}
+.song-overview ul {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	align-items: flex-start;
+}
+
+.songs {
+	width: 20em;
+	background-color: #f2f2f2;
+	margin: 1em 0;
+}
+.songs .wrapper {
+	width: 100%;
+	height: 12em;
+	overflow: hidden;
+}
+.songs img {
+	width: 100%;
+	height: auto;
+	vertical-align: middle;
+	display: inline;
+}
+.title {
+	font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+
 /* JS */
 .hide {
 	display: none;
 }
+
+
+
+
+
+
+
+
+

@@ -2,10 +2,11 @@
 (function() {
 	'use strict';
 
-	// init Templating
+	// Get 'gobal' parts
 	var main = document.querySelector('main');
-	var cityTemplate = document.querySelector('#city');
-	var source = document.querySelector('#city');
+	var source = document.querySelector('#city').innerHTML;
+	var searchForm = document.querySelector('#search').innerHTML;
+	var noResult = document.querySelector('#no-restult').innerHTML;
 
 	// Hide error template
 	var errorTemplate = document.querySelector('#error');
@@ -23,58 +24,29 @@
 	var routes = {
 		init: function() {
 
+			window.onload = function() {
+				routie('search');
+			};
+
 			// routers for all the elements on the page
 			routie({
+				'search': function() {
+			    	var title = "Search";
+			    	soundCloud.init(title);
+			    },
 				'all': function() {
-			    	var placeName = "All places";
-			    	soundcloud.init(placeName);
-			    },
-			    'amsterdam': function() {
-			    	var placeName = "Amsterdam";
-			    	soundcloud.init(placeName);
-			    },
-			    'berlin': function() {
-			    	var placeName = "Berlin";
-			    	soundcloud.init(placeName);
-			    },
-			    'london': function() {
-			    	var placeName = "London";
-			    	soundcloud.init(placeName);
+			    	var title = "All songs";
+			    	soundCloud.init(title);
 			    }
 			});
 
 		}
 	}
 
-	// var places = {
-	// 	all: function() {
 
-	// 		var placeName = "All places";
-	// 		soundcloud.init(placeName);
-
-	// 	},
-	// 	amsterdam: function() {
-
-	// 		var placeName = "Amsterdam";
-	// 		soundcloud.init(placeName);
-
-	// 	},
-	// 	berlin: function() {
-
-	// 		var placeName = "Berlin";
-	// 		soundcloud.init(placeName);
-
-	// 	},
-	// 	london: function() {
-
-	// 		var placeName = "London";
-	// 		soundcloud.init(placeName);
-
-	// 	}
-	// }
-
-	var soundcloud = {
-		init: function(placeName) {
+	// make the function return the data
+	var soundCloud = {
+		init: function(title) {
 
 			// soundcloud url data
 			var sc = {
@@ -82,21 +54,25 @@
 				tracks: "tracks?client_id=2fda30f3c5a939525422f47c385564ae",
 				users: "users?client_id=2fda30f3c5a939525422f47c385564ae"
 			}
-
 			nanoajax.ajax({url: sc.BaseUrl + '/' + sc.tracks}, function(amount, data) {
-				
+
 				// Get / Store data
-				var data = JSON.parse(data);
+				var rawData = JSON.parse(data);
 
-				var templateContent = {
-					placeName: placeName,
-				    title: data[4].title,
-				    imgUrl: data[4].artwork_url,
-				    discription: data[4].discription,
-				    genre: data[4].genre
-				};
+				console.log(rawData);
 
-				template.init(templateContent);
+				if ( title === "Search" ) {
+
+					title = "Search";
+					search.render(rawData, title);
+
+				}
+				if ( title === "All songs" ) {
+
+					title = "All songs";
+					template.render(rawData, source);
+
+				}
 
 			});
 
@@ -104,26 +80,97 @@
 	}
 
 	var template = {
-		init: function(templateContent) {
+		render: function(data, id, beyond) {
 
-			var templateContent = templateContent;
+			var template = Handlebars.compile(id);
+			var html = template(data);
+			main.innerHTML = html;
 
-			// Handlebars templateing
-			var innerSource = source.innerHTML;
-			var template = Handlebars.compile(innerSource);
+			if ( beyond === true ) {
 
-			var context = {
-				placeName: templateContent.placeName,
-				title: templateContent.title,
-				discription: templateContent.discription,
-				genre: templateContent.genre
+				search.handleSearch(data, id);
+
 			}
 
-			var html = template(context);
+		}
+	}
 
-			// source.innerHTML = html;
+	var search = {
+		render: function(rawData, title) {
 
-			console.log(source);
+			var beyond = true;
+		
+			template.render(rawData, searchForm, beyond);
+
+		},
+		handleSearch: function(rawData, title) {
+
+			var submit = document.querySelector('#submit');
+			submit.onclick = function() {
+			
+				var searchText = document.querySelector('#song').value;
+
+				var dataDat = [];
+				var matched = false;
+
+				var filterData = _.filter(rawData, function(data) {
+
+					var nessesaryData = [
+						{
+							title: data.title
+						},
+						{
+							genre: data.genre
+						}
+					];
+
+					var evens = _.filter(nessesaryData, function(obj) {
+					    
+					    if( obj.title ) {
+					    	
+					    	var matchTitle = obj.title.match(searchText);
+					    	return matchTitle;
+					    	// USE TrackId instead of the title? :)
+
+					    }
+					    if( obj.genre ) {
+					    	
+					    	var matchGenre = obj.genre.match(searchText);
+					    	return matchGenre;
+
+					    }
+					    
+					});
+
+					// Robbert
+					if(evens.length > 0) {
+						console.dir("match " + evens[0])
+						dataDat.push(evens[0])
+						matched = true;
+					}
+					else {
+						console.log("no match")
+					}
+
+					if ( matched === true ) {
+
+						template.render(dataDat, source);
+						console.log(matched);
+
+					} else {
+
+						var message = {
+							title: "no search results"
+						}
+						console.log(matched);
+						template.render(message, noResult);						
+
+					}
+
+
+				});
+
+			}
 
 		}
 	}
