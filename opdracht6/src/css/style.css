@@ -66,6 +66,7 @@ li img {
 li:hover img {
 	margin-left: -20%;
 	margin-top: -20%;
+	transform-origin: middle;
 	width: 150%;
 }
 
