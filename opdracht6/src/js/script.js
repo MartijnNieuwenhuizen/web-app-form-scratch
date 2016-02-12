@@ -1,16 +1,13 @@
-// Add the iifi
 (function() {
 	'use strict';
 
-	// Get 'gobal' parts
 	var main = document.querySelector('main');
-	var source = document.querySelector('#city').innerHTML;
-	var searchForm = document.querySelector('#search').innerHTML;
-	var noResult = document.querySelector('#no-restult').innerHTML;
-
-	// Hide error template
-	var errorTemplate = document.querySelector('#error');
-	errorTemplate.classList.add('hide');
+	// Get handlebars template parts
+	var templates = {
+		songs: document.querySelector('#songs').innerHTML,
+		searchform: document.querySelector('#search').innerHTML,
+		noSearchResults: document.querySelector('#no-restult').innerHTML
+	}
 
 	var app = {
 		init: function() {
@@ -43,8 +40,6 @@
 		}
 	}
 
-
-	// make the function return the data
 	var soundCloud = {
 		init: function(title) {
 
@@ -54,19 +49,21 @@
 				tracks: "tracks?client_id=2fda30f3c5a939525422f47c385564ae",
 				users: "users?client_id=2fda30f3c5a939525422f47c385564ae"
 			}
+			// Ajax call
 			nanoajax.ajax({url: sc.BaseUrl + '/' + sc.tracks}, function(amount, data) {
 
 				// store data
 				var rawData = JSON.parse(data);
 
+				// Choose wich template to render
 				if ( title === "Search" ) {
 
-					template.renderForm(rawData, searchForm);
+					template.renderForm(rawData);
 
 				}
 				if ( title === "All songs" ) {
 
-					template.render(rawData, source);
+					template.render(rawData, templates.songs);
 
 				}
 
@@ -75,61 +72,88 @@
 		}
 	}
 
+	// Render the templates
 	var template = {
 		render: function(data, htmlTemplate) {
-			
-			this.display(data, htmlTemplate);
 
-		},
-		renderForm: function(data, htmlTemplate) {
-
-			this.display(data, htmlTemplate);
-			search.handleSearch(data, htmlTemplate);
-
-		},
-		display: function(data, htmlTemplate) {
-
+			// Render template with handlebars
 			var template = Handlebars.compile(htmlTemplate);
 			var html = template(data);
 			main.innerHTML = html;
 
+			handle.detail();
+
+		},
+		renderForm: function(rawData) {
+
+			// render the searchform template
+			this.render(rawData, templates.searchform);
+			// call the search
+			handle.search(rawData);
+
 		}
 	}
 
-	var search = {
-		handleSearch: function(rawData, htmlTemplate) {
+	// data transformeren
+	var handle = {
+		search: function(rawData) {
 
-			var submit = document.querySelector('#submit');
-			submit.onclick = function() {
+			var submitButton = document.querySelector('#submit');
+			submitButton.onclick = function() {
 			
-				var searchText = document.querySelector('#song').value;
+				var searchValue = document.querySelector('#song').value;
 
 				var matchingData = [];
 
-				var evens = _.filter(rawData, function(obj) {
+				_.filter(rawData, function(matched) {
 
-				    if( obj.title && obj.title.match(searchText) || obj.genre && obj.genre.match(searchText)) {
+					// if the title or genre of a object matches
+				    if( matched.title && matched.title.match(searchValue) || matched.genre && matched.genre.match(searchValue)) {
 
-						matchingData.push(obj);
+				    	// push this data in the matchingdata array
+						matchingData.push(matched);
 
 				    }
 				   
 				 });   
 
+				// if there are search results
 				if( matchingData.length ) {
 
-					template.render(matchingData, source);	
+					template.render(matchingData, templates.songs);	
 
 				}
+				// if there are no search results
 				else {
 
 					var message = {
-						title: "no search results"
+						title: "no search results match"
 					}
 				
-					template.render(message, noResult, noResult);						
+					template.render(message, templates.noSearchResults);						
 
 				}
+
+			}
+
+		}
+		, detail: function() {
+
+			var songs = document.querySelectorAll('.songs');
+
+			// If there are songs shown
+			if ( songs.length ) {
+
+				[].forEach.call(songs, function(songs) {
+
+					songs.onclick = function() {
+
+						// Show detail items of this item on the page
+						main.innerHTML = this.innerHTML;
+
+					}
+
+				});
 
 			}
 
