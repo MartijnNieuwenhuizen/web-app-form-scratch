@@ -67,5 +67,12 @@ In main-old.js zijn i.p.v. objecten, constructoren gebruikt. Dit is voor deze el
 * Als deze template bestaat, wordt hij ingeladen in de HTML van de main. Bestaat hij niet, wordt er een error template ingeladen
 * Als je voor de eerste keer op de site komt, dus op de '/', wordt de hash veranderd daar #home (de homepage)
 
-[Link naar de webpagina](http://martijnnieuwenhuizen.nl/tempereraly/)
+[Link naar de webpagina](http://martijnnieuwenhuizen.github.io/web-app-from-scratch/one/)
+
+**Opdracht 6**
+Working with an API
+Routing
+Templating
+Underscore
+[Link naar de webpagina](http://martijnnieuwenhuizen.github.io/web-app-from-scratch/two/)
 
