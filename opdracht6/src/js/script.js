@@ -24,12 +24,12 @@
 	var routes = {
 		init: function() {
 
-			window.onload = function() {
-				routie('search');
-			};
-
 			// routers for all the elements on the page
 			routie({
+				// if the url has no hash, set hash to search
+				'': function() {
+					routie('search');
+				},
 				'search': function() {
 			    	var title = "Search";
 			    	soundCloud.init(title);
@@ -56,20 +56,16 @@
 			}
 			nanoajax.ajax({url: sc.BaseUrl + '/' + sc.tracks}, function(amount, data) {
 
-				// Get / Store data
+				// store data
 				var rawData = JSON.parse(data);
-
-				console.log(rawData);
 
 				if ( title === "Search" ) {
 
-					title = "Search";
-					search.render(rawData, title);
+					template.renderForm(rawData, searchForm);
 
 				}
 				if ( title === "All songs" ) {
 
-					title = "All songs";
 					template.render(rawData, source);
 
 				}
@@ -80,95 +76,60 @@
 	}
 
 	var template = {
-		render: function(data, id, beyond) {
+		render: function(data, htmlTemplate) {
+			
+			this.display(data, htmlTemplate);
 
-			var template = Handlebars.compile(id);
+		},
+		renderForm: function(data, htmlTemplate) {
+
+			this.display(data, htmlTemplate);
+			search.handleSearch(data, htmlTemplate);
+
+		},
+		display: function(data, htmlTemplate) {
+
+			var template = Handlebars.compile(htmlTemplate);
 			var html = template(data);
 			main.innerHTML = html;
-
-			if ( beyond === true ) {
-
-				search.handleSearch(data, id);
-
-			}
 
 		}
 	}
 
 	var search = {
-		render: function(rawData, title) {
-
-			var beyond = true;
-		
-			template.render(rawData, searchForm, beyond);
-
-		},
-		handleSearch: function(rawData, title) {
+		handleSearch: function(rawData, htmlTemplate) {
 
 			var submit = document.querySelector('#submit');
 			submit.onclick = function() {
 			
 				var searchText = document.querySelector('#song').value;
 
-				var dataDat = [];
-				var matched = false;
+				var matchingData = [];
 
-				var filterData = _.filter(rawData, function(data) {
+				var evens = _.filter(rawData, function(obj) {
 
-					var nessesaryData = [
-						{
-							title: data.title
-						},
-						{
-							genre: data.genre
-						}
-					];
+				    if( obj.title && obj.title.match(searchText) || obj.genre && obj.genre.match(searchText)) {
 
-					var evens = _.filter(nessesaryData, function(obj) {
-					    
-					    if( obj.title ) {
-					    	
-					    	var matchTitle = obj.title.match(searchText);
-					    	return matchTitle;
-					    	// USE TrackId instead of the title? :)
+						matchingData.push(obj);
 
-					    }
-					    if( obj.genre ) {
-					    	
-					    	var matchGenre = obj.genre.match(searchText);
-					    	return matchGenre;
+				    }
+				   
+				 });   
 
-					    }
-					    
-					});
+				if( matchingData.length ) {
 
-					// Robbert
-					if(evens.length > 0) {
-						console.dir("match " + evens[0])
-						dataDat.push(evens[0])
-						matched = true;
+					template.render(matchingData, source);	
+
+				}
+				else {
+
+					var message = {
+						title: "no search results"
 					}
-					else {
-						console.log("no match")
-					}
+				
+					template.render(message, noResult, noResult);						
 
-					if ( matched === true ) {
-
-						template.render(dataDat, source);
-						console.log(matched);
-
-					} else {
-
-						var message = {
-							title: "no search results"
-						}
-						console.log(matched);
-						template.render(message, noResult);						
-
-					}
-
-
-				});
+				}
 
 			}
 
