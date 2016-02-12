@@ -149,6 +149,8 @@
 				// 		Loop thrue
 				// 		.call: add data one by one
 				// 		put data in the parameter songs
+
+				// Idea by Robin van Nispen
 				[].forEach.call(songs, function(songs) {
 
 					songs.onclick = function() {
