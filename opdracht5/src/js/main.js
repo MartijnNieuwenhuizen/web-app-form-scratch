@@ -8,7 +8,7 @@
 	var templates = document.querySelectorAll('.template');
 	for ( var i = 0; i < templates.length; i++ ) {
 
-		templates[i].className = 'hide';
+		templates[i].classList.add('hide');
 
 	}
 

@@ -144,16 +144,33 @@
 			// If there are songs shown
 			if ( songs.length ) {
 
+				// Old Slow version
+				// for ( var i = 0; i < songs.length; i++ ) {
+
+				// 	songs[i].onclick = function() {
+
+				// 		main.innerHTML = this.innerHTML;
+
+				// 	}
+
+				// }
+				// Prototype version
+				// 		maak de array aan
+				// 		loop er een voor een doorheen
+				// 		.call = stopt de data er een voor een in, zijn parameten is een individueel item
+				// 		(songs, function(songs)) { parameter 1 is een nodelist met informatie. de functie ......
 				[].forEach.call(songs, function(songs) {
 
 					songs.onclick = function() {
-
+						
 						// Show detail items of this item on the page
 						main.innerHTML = this.innerHTML;
 
 					}
 
 				});
+
+				function(songs) = de this in de loop. // Tweede argument van forEach is de this in de loop
 
 			}
 
