@@ -115,7 +115,7 @@
 
 				    }
 				   
-				 });   
+				});   
 
 				// if there are search results
 				if( matchingData.length ) {
@@ -170,7 +170,7 @@
 
 				});
 
-				function(songs) = de this in de loop. // Tweede argument van forEach is de this in de loop
+				// function(songs) = de this in de loop. // Tweede argument van forEach is de this in de loop
 
 			}
 

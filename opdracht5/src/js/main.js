@@ -1,4 +1,4 @@
-// Add the iifi
+// Add the iife: Immediately-invoked function expression
 (function() {
 	'use strict';
 
