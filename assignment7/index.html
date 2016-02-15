@@ -29,30 +29,19 @@
 			<ul>
 				{{#each this}}
 					<li class="songs">
-						<div class="wrapper">
-							{{#if artwork_url}}
+						{{#if artwork_url}}
+							<figure>
 								<img src="{{ artwork_url }}" alt="Artwork">
-							{{else}}
-							    <img src="src/img/album.png" alt="placeholder">
-							{{/if}}
-						</div>
-
-						<!-- <span>{{ stream_url }}</span> -->
-
-						<p class="title">{{ title }}</p>
-						<p><span>Genre:</span> {{ genre }}</p>
-
-						{{#if description}}
-							<p>{{ description }}</p>
+							</figure>
 						{{else}}
-							<p class="no-discription">Sorry, track has no discription</p>
+							<figure>
+						    	<img src="src/img/album.png" alt="placeholder">
+						    </figure>
 						{{/if}}
-
 						<div>
-							{{ track_url }}
+							<p class="title">{{ title }}</p>
+							<p><span>Genre:</span> {{ genre }}</p>
 						</div>
-
-						<p><span>Added By:</span> {{ user.username }} </p>
 					</li>
 				{{/each}}
 			</ul>
@@ -70,12 +59,6 @@
 				<button id="submit">Search</button>
 			</form>
 		</section>
-
-	</script>
-	
-	<script id="no-restult" type="text/x-handlebars-template">
-	  	
-	  	<h1>{{ title }}</h1>
 
 	</script>
 

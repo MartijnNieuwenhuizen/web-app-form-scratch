@@ -5,7 +5,6 @@
 		main: document.querySelector('main'),
 		songs: document.querySelector('#songs'),
 		searchform: document.querySelector('#search'),
-		noSearchResults: document.querySelector('#no-restult'),
 		error: document.querySelector('#error'),
 		loading: document.querySelector('#loading')
 	}
@@ -33,7 +32,7 @@
 			    	search.action();
 			    },
 				'all': function() {
-			    	soundCloud.action();
+			    	soundCloud.getData();
 			    },
 			    '*': function() {
 			    	var content = {
@@ -48,7 +47,7 @@
 	}
 
 	var soundCloud = {
-		getData: function(url) {
+		request: function(url) {
 
 			return new Promise(function(resolve, reject) { // Resolve = .then && Reject = .catch;
 
@@ -56,16 +55,13 @@
 
 				request.onloadstart = function() {
 
-					console.log("Start Loading Data");
 					// if more than 250ms
 					spinner.start();
 
 				}
 				request.onloadend = function(response) {
 
-					console.log("Loaded Data");
 					var data = request.response;
-					
 					resolve(data);					
 
 				}
@@ -79,7 +75,7 @@
 
 		},
 
-		action: function(term) {
+		getData: function(term) {
 
 			var sc = {
 				BaseUrl: "https://api.soundcloud.com",
@@ -99,7 +95,7 @@
 
 			}
 
-			this.getData(soundCloudUrl)	
+			this.request(soundCloudUrl)	
 				.then(function(response) {
 
 					console.log("load content");
@@ -181,7 +177,7 @@
 			submitButton.onclick = function() {
 			
 				var searchValue = document.querySelector('#song').value.toLowerCase();
-				soundCloud.action(searchValue);
+				soundCloud.getData(searchValue);
 
 			}
 
@@ -192,13 +188,12 @@
 	var spinner = {
 		start: function() {
 
-			console.log("Start Spinner");
 			template.render(null, htmlElements.loading.innerHTML);
 
 		},
 		stop: function() {
 
-			console.log("Stop Spinner");
+			// console.log("Stop Spinner");
 
 		}
 	};

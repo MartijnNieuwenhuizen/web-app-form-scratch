@@ -64,9 +64,7 @@ li img {
 	transition: .3s;
 }
 li:hover img {
-	margin-left: -20%;
-	margin-top: -20%;
-	width: 150%;
+	height: 150%;
 }
 
 /* HEADER */
@@ -155,33 +153,47 @@ SOUNDCLOUD
 
 */
 .song-overview {
-
-}
-.song-overview ul {
 	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-around;
-	align-items: flex-start;
+	flex-flow: column wrap;
+	align-items: center;
 }
-
 .songs {
-	width: 20em;
-	background-color: #f2f2f2;
-	margin: 1em 0;
+	display: flex;
+	flex-flow: row no-wrap;
+	justify-content: flex-start;
+	align-items: center;
+	width: 30em;
+	height: 7em;
+	margin: 1em 0; 
+	background-color: #f1f1f1;
+
 }
-.songs .wrapper {
-	width: 100%;
-	height: 12em;
+figure {
+	width: 6em;
+	height: 6em;
 	overflow: hidden;
+	margin: .5em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-.songs img {
-	width: 100%;
-	height: auto;
-	vertical-align: middle;
-	display: inline;
+figure img {
+	width: auto;
+	height: 100%;
+	margin: 0 auto;
+
 }
-.title {
+.songs div {
+	align-self: flex-start;
+}
+.songs div .title {
 	font-weight: 700;
+}
+.songs p {
+	
+}
+.songs span {
+	
 }
 
 
@@ -234,7 +246,17 @@ SOUNDCLOUD
 }
 
 
-
+.loading {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	align-items: center;
+}
+.loading img {
+	align-self: center;
+	width: 10em;
+	height: 10em;
+}
 
 
 
