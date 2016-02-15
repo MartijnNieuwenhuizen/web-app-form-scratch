@@ -6,7 +6,8 @@
 		songs: document.querySelector('#songs'),
 		searchform: document.querySelector('#search'),
 		noSearchResults: document.querySelector('#no-restult'),
-		error: document.querySelector('#error')
+		error: document.querySelector('#error'),
+		loading: document.querySelector('#loading')
 	}
 
 	var app = {
@@ -64,17 +65,21 @@
 
 				request.onloadstart = function() {
 
-					console.log("Start Spinner");
-					// startSpinner();
+					console.log("Start Loading Data");
+					spinner.start();
 
 				}
 				request.onloadend = function(response) {
-					
-					console.log("Hide Spinner");
-					// hideSpinner();
-					var data = request.response;
-					
-					resolve(data);
+
+					setTimeout(function(){ 
+
+						console.log("Loaded Data");
+						spinner.stop();
+						var data = request.response;
+						
+						resolve(data);
+						
+					}, 3000);
 
 				}
 
@@ -193,7 +198,7 @@
 						title: "no search results match"
 					}
 				
-					template.render(message, htmlElements.noSearchResults.innerHTML);						
+					template.render(message, htmlElements.noSearchResults.innerHTML);
 
 				}
 
@@ -201,6 +206,23 @@
 
 		}
 
+	}
+
+	var spinner = {
+		start: function() {
+
+			console.log("Start Spinner");
+			var message = {
+				title: "no search results match"
+			}
+			template.render(message, htmlElements.loading.innerHTML);
+
+		},
+		stop: function() {
+
+			console.log("Stop Spinner");
+
+		}
 	}
 
 	// start the main app
