@@ -29,11 +29,11 @@
 				},
 				'search': function() {
 			    	var title = "Search";
-			    	soundCloud.init(title);
+			    	soundCloud.action(title);
 			    },
 				'all': function() {
 			    	var title = "All songs";
-			    	soundCloud.init(title);
+			    	soundCloud.action(title);
 			    },
 			    '*': function() {
 			    	template.render(null, htmlElements.error.innerHTML);
@@ -44,44 +44,60 @@
 	}
 
 	var soundCloud = {
-		init: function(title) {
+		url: function(title) {
 
-			// soundcloud url data
 			var sc = {
 				BaseUrl: "https://api.soundcloud.com",
 				tracks: "tracks?client_id=2fda30f3c5a939525422f47c385564ae",
 				users: "users?client_id=2fda30f3c5a939525422f47c385564ae"
 			}
-			// Ajax call
-			nanoajax.ajax({url: sc.BaseUrl + '/' + sc.tracks}, function(amount, data) {
+			var soundCloudUrl = sc.BaseUrl + '/' + sc.tracks;
+			console.log(soundCloudUrl);
+			return soundCloudUrl;
 
-				// store data
-				var rawData = JSON.parse(data);
+		},
+		getData: function(url) {
 
-				// Choose wich template to render
-				if ( title === "Search" ) {
+			return new Promise(function(resolve, reject) {
 
-					template.renderForm(rawData);
+				var request = new XMLHttpRequest();
 
-				}
-				if ( title === "All songs" ) {
+				request.onloadstart = function() {
 
-					template.render(rawData, htmlElements.songs.innerHTML);
-
-				}
-				if ( title === "Error" ) {
-
-					template.render(rawData, htmlElements.songs.innerHTML);
+					// showLoader();
+					console.log("started");
 
 				}
+				request.onloadend = function(response) {
+				
+					// hideLoader();
+					// resolve(response);
+					console.log("ended");
+
+				}
+
+				request.onerror = reject;
+
+				request.open('GET', url, true);
+				request.send();
+
+				console.log(request);
 
 			});
+
+		},
+		action: function(title) {
+
+			this.getData('https://api.soundcloud.com/tracks?client_id=2fda30f3c5a939525422f47c385564ae');
 
 		}
 	}
 
 	// Render the templates
 	var template = {
+		
+		// ToDo: Functionele animatie: let content fade-in/out
+
 		render: function(data, htmlTemplate) {
 
 			// Render template with handlebars
@@ -92,6 +108,7 @@
 			this.detail();
 
 		},
+		// ToDo: Make this one function
 		renderForm: function(rawData) {
 
 			// render the searchform template
@@ -175,3 +192,10 @@
 	app.init();
 
 })();
+
+
+
+// More To Do: 
+// 				Add a gesture
+// 				Visulize the flow
+// 				Cut your code into modules
