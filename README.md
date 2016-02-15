@@ -1,6 +1,6 @@
 # WebAppFromScratch
 
-**Opdracht 2**
+**Assignment 2**
 ## Voor- en nadelen JavaScript libraries/frameworks onderzoeken 
 Het gebruik van een JavaScript librarie/framework hangt helemaal af van de context. Daarom is het ook aan te raden om voorafgaand van elk project jezelf de vraag te stellen, heb ik werkelijk een MVC-controller nodig, of ga ik in dit project de hele jQuery librarie gebruiken of alleen de $(‘’); functie.
 
@@ -26,7 +26,7 @@ Maar ik deel dezelfde mening als Allenc: gebruik een framework wanneer de comple
 
 
 
-**Opdracht 3**
+**Assignment 3**
 ## Voor- en nadelen single page web app onderzoeken 
 #### Single Page Application
 Een Single Page Application is een snelle manier om een applicatie te maken die op alle devices werkt. Hieraan zitten wel wat moeilijkheden/nadelen, maar natuurlijk ook voordelen.
@@ -45,8 +45,8 @@ Maar terug naar de voordelen, omdat alles modulair gebrouwd wordt is het mogenli
 
 *Tilkov, S.* (2013). Why I hate your Single Page App. Geraadpleegd op 01-02-2016, van https://medium.com/@stilkov/why-i-hate-your-single-page-app-f08bb4ff9134#.ehltv7lsk
 
-**Opdracht 4**
-## Code shown in folder opdracht 4
+**Assignment 4**
+## Code shown in folder assignment4
 In deze opdracht is de code van justus verbeterd qua structuur. Er zitten twee mappen in deze folder, als eerst 'justus', dit is de originele code en als laatst 'martijn', dit is de code door mij verbeterd. 
 Het bestand is opgedeeld in verschillende onderdelen. 
 * lib -> hierin zit de library die gebruikt wordt
@@ -55,8 +55,8 @@ Deze onderdelen worden door module.exports & require ingeladen in de main.js
 
 In de main.js is voor de map function de prototype methode gebruikt zodat het mogelijk is om meerdere maps in te laden met dezelfde basis. Daarnaast is het modulairder, dus beter her-te-gebruiken.
 
-**Opdracht 5**
-## Code shown in folder opdracht 5
+**Assignment 5**
+## Code shown in folder assignment5
 In opdracht 5 wordt de basis van mijn eiegen Single Page Web Application opgezet.
 Op JS gebied wordt de app, routes & sections opgezet. Daarnaast worden de secties met 'hashchange' getoggled.
 In main-old.js zijn i.p.v. objecten, constructoren gebruikt. Dit is voor deze elementen te overdreven maar bewaard gebleven voor de aankomende opdrachten.
@@ -69,7 +69,7 @@ In main-old.js zijn i.p.v. objecten, constructoren gebruikt. Dit is voor deze el
 
 [Link naar de webpagina](http://martijnnieuwenhuizen.github.io/web-app-from-scratch/one/)
 
-**Opdracht 6**
+**Assignment 6**
 Working with an API
 Routing
 Templating
