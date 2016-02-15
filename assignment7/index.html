@@ -82,8 +82,10 @@
 	<script id="error" type="text/x-handlebars-template">
 	  	
 	  	<section class="errorPage">
-	  		<h1>404</h1>
-	  		<p>Sorry page not found</p>	
+	  		<h1>{{ title }}</h1>
+	  		{{#if message}}
+	  			<p>{{ message }}</p>
+	  		{{/if}}	
 	  	</section>
 
 	</script>
