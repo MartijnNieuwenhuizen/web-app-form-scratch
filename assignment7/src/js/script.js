@@ -58,21 +58,23 @@
 		},
 		getData: function(url) {
 
-			return new Promise(function(resolve, reject) {
+			return new Promise(function(resolve, reject) { // Resolve = .then && Reject = .catch;
 
 				var request = new XMLHttpRequest();
 
 				request.onloadstart = function() {
 
-					// showLoader();
-					console.log("started");
+					console.log("Start Spinner");
+					// startSpinner();
 
 				}
 				request.onloadend = function(response) {
-				
-					// hideLoader();
-					// resolve(response);
-					console.log("ended");
+					
+					console.log("Hide Spinner");
+					// hideSpinner();
+					var data = request.response;
+					
+					resolve(data);
 
 				}
 
@@ -81,14 +83,27 @@
 				request.open('GET', url, true);
 				request.send();
 
-				console.log(request);
-
 			});
 
 		},
 		action: function(title) {
 
-			this.getData('https://api.soundcloud.com/tracks?client_id=2fda30f3c5a939525422f47c385564ae');
+			this.getData('https://api.soundcloud.com/tracks?client_id=2fda30f3c5a939525422f47c385564ae')
+				// Resolve
+				.then(function(response) {
+
+					console.log("load content");
+					var rawData = JSON.parse(response);
+					template.render(rawData, htmlElements.songs.innerHTML);
+
+				})
+				
+				// Reject
+				.catch(function(err) {
+
+					console.log("error");
+
+				});
 
 		}
 	}
