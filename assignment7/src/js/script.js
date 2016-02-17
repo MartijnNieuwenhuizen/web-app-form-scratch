@@ -6,8 +6,12 @@
 		songs: document.querySelector('#songs'),
 		searchform: document.querySelector('#search'),
 		error: document.querySelector('#error'),
-		loading: document.querySelector('#loading')
+		loading: document.querySelector('#loading'),
+		detail: document.querySelector('#detail')
 	}
+
+	var rawData;
+	var specificId;
 
 	var app = {
 		init: function() {
@@ -33,6 +37,9 @@
 			    },
 				'all': function() {
 			    	soundCloud.getData();
+			    },
+			    '*/:id': function() {
+			    	template.showDetail(rawData);
 			    },
 			    '*': function() {
 			    	var content = {
@@ -98,8 +105,8 @@
 			this.request(soundCloudUrl)	
 				.then(function(response) {
 
-					console.log("load content");
-					var rawData = JSON.parse(response);
+					// console.log("load content");
+					rawData = JSON.parse(response);
 
 					if ( rawData.length ) {
 
@@ -108,7 +115,8 @@
 					} else {
 						
 						var content = {
-							title: "Sorry, no Search results"
+							title: "Sorry,",
+							message: "no Search results"
 						}
 						template.render(content, htmlElements.error.innerHTML);
 
@@ -118,7 +126,11 @@
 				// Reject
 				.catch(function(err) {
 
-					console.log("error");
+					console.dir(err);
+					var content = {
+						title: "Sorry, unable to make a connection with SoundCloud"
+					}
+					template.render(content, htmlElements.error.innerHTML);
 
 				});
 
@@ -141,6 +153,8 @@
 
 			spinner.stop();
 
+			this.detail();
+
 		},
 		detail: function() {
 
@@ -154,16 +168,32 @@
 				// call leent de methode van de array: de forEach loop
 				Array.prototype.forEach.call(songs, function(song) {
 
-					song.onclick = function() {
-						
-						// Show detail items of this item on the page
-						htmlElements.main.innerHTML = this.innerHTML;
+					song.onclick = function(e) {
+
+						specificId = this.id;
+						window.location.href = window.location.href + '/:' + specificId;
 
 					}
 
 				});
 
 			}
+
+		},
+		showDetail: function(data) {
+
+				var currentData = data;
+
+				var matchingData = [];
+				
+				_.filter(currentData, function(singleSong) {
+
+					if ( singleSong.id == specificId ) {
+						matchingData.push(singleSong);
+					}
+
+			    });
+				template.render(matchingData[0], htmlElements.detail.innerHTML);
 
 		}
 	};

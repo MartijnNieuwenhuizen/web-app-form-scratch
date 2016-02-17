@@ -28,7 +28,7 @@
 			<h1>{{ placeName }}</h1>
 			<ul>
 				{{#each this}}
-					<li class="songs">
+					<li class="songs" id="{{ id }}">
 						{{#if artwork_url}}
 							<figure>
 								<img src="{{ artwork_url }}" alt="Artwork">
@@ -45,6 +45,33 @@
 					</li>
 				{{/each}}
 			</ul>
+		</section>
+
+	</script>
+
+	<script id="detail" type="text/x-handlebars-template">
+	  	
+	  	<section class="song-detail" id="{{ id }}">
+			{{#if artwork_url}}
+				<figure>
+					<img src="{{ artwork_url }}" alt="Artwork">
+				</figure>
+			{{else}}
+				<figure>
+			    	<img src="src/img/album.png" alt="placeholder">
+			    </figure>
+			{{/if}}
+			<div>
+				<p class="title">{{ title }}</p>
+				<p><span>Genre:</span> {{ genre }}</p>
+
+				{{#if stream_url}}
+					<span>{{ stream_url }}</span>
+				{{/if}}
+				{{#if stream_url}}
+					<p>{{ description }}</p>
+				{{/if}}
+			</div>
 		</section>
 
 	</script>
