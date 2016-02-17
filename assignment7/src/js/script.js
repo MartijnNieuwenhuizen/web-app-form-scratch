@@ -8,7 +8,8 @@
 		error: document.querySelector('#error'),
 		loading: document.querySelector('#loading'),
 		detail: document.querySelector('#detail'),
-		songDetail: document.querySelector('.song-detail')
+		songDetail: document.querySelector('.song-detail'),
+		searchSongs: document.querySelector('#search-songs')
 	}
 
 	// Needed global vars
@@ -35,7 +36,7 @@
 				'search': function() {
 			    	search.action();
 			    },
-				'all': function() {
+				'latest': function() {
 			    	soundCloud.getData();
 			    },
 			    '/:id': function() {
@@ -82,7 +83,7 @@
 
 		},
 
-		getData: function(term) {
+		getData: function(term, title) {
 
 			var sc = {
 				BaseUrl: "https://api.soundcloud.com",
@@ -116,7 +117,16 @@
 
 					if ( rawData.length ) {
 
-						template.render(rawData, htmlElements.songs.innerHTML);
+						if ( title == 'search-songs' ) {
+
+							template.render(rawData, htmlElements.searchSongs.innerHTML);
+
+						} else {
+
+							template.render(rawData, htmlElements.songs.innerHTML);
+
+						}
+
 
 					} else {
 						
@@ -226,7 +236,7 @@
 			submitButton.onclick = function() {
 			
 				var searchValue = document.querySelector('#song').value.toLowerCase();
-				soundCloud.getData(searchValue);
+				soundCloud.getData(searchValue, 'search-songs');
 
 			}
 

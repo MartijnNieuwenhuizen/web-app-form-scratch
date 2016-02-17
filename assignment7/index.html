@@ -15,7 +15,7 @@
 	<aside>
 		<nav>
 			<ul>
-				<li><a href="#all">All Songs</a></li>
+				<li><a href="#latest">Latest Songs</a></li>
 				<li><a href="#search">Search</a></li>
 			</ul>
 		</nav>
@@ -27,7 +27,7 @@
 	<script id="songs" type="text/x-handlebars-template">
 	  	
 	  	<section class="song-overview">
-			<h1>{{ placeName }}</h1>
+			<h1>100 Latest Songs</h1>
 			<ul>
 				{{#each this}}
 					<li class="songs" id="{{ id }}">
@@ -37,7 +37,7 @@
 							</figure>
 						{{else}}
 							<figure>
-						    	<img src="src/img/album.png" alt="placeholder">
+						    	<img src="./src/img/album.png" alt="placeholder">
 						    </figure>
 						{{/if}}
 						<div>
@@ -47,6 +47,42 @@
 					</li>
 				{{/each}}
 			</ul>
+
+		</section>
+
+	</script>
+
+	<script id="search-songs" type="text/x-handlebars-template">
+	  	
+	  	<section class="song-overview">
+			<h1>Search Results</h1>
+			<ul>
+				{{#each this}}
+					<li class="songs" id="{{ id }}">
+						{{#if artwork_url}}
+							<figure>
+								<img src="{{ artwork_url }}" alt="Artwork">
+							</figure>
+						{{else}}
+							<figure>
+						    	<img src="./src/img/album.png" alt="placeholder">
+						    </figure>
+						{{/if}}
+						<div>
+							<p class="title">{{ title }}</p>
+							<p><span>Genre:</span> {{ genre }}</p>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+		</section>
+		<section id="searchForm">
+			<form action="">
+				<label for="song">Search a Song:</label>
+				<input type="text" id="song" required="true">
+
+				<button id="submit">Search</button>
+			</form>
 		</section>
 
 	</script>
