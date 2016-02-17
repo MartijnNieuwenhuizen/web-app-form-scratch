@@ -7,11 +7,12 @@
 		searchform: document.querySelector('#search'),
 		error: document.querySelector('#error'),
 		loading: document.querySelector('#loading'),
-		detail: document.querySelector('#detail')
+		detail: document.querySelector('#detail'),
+		songDetail: document.querySelector('.song-detail')
 	}
 
+	// Needed global vars
 	var rawData;
-	var specificId;
 
 	var app = {
 		init: function() {
@@ -32,13 +33,12 @@
 					routie('search');
 				},
 				'search': function() {
-			    	// template.render(null, htmlElements.searchform.innerHTML);
 			    	search.action();
 			    },
 				'all': function() {
 			    	soundCloud.getData();
 			    },
-			    '*/:id': function() {
+			    '/:id': function() {
 			    	template.showDetail(rawData);
 			    },
 			    '*': function() {
@@ -89,7 +89,7 @@
 				id: 'client_id=2fda30f3c5a939525422f47c385564ae',
 				tracks: "tracks?",
 				users: "users?client_id=2fda30f3c5a939525422f47c385564ae",
-				limit: 'limit=200'
+				limit: 'limit=100'
 			}
 
 			if ( term ) {
@@ -107,6 +107,12 @@
 
 					// console.log("load content");
 					rawData = JSON.parse(response);
+
+					var songString = JSON.stringify(rawData);
+					localStorage.setItem('localData', songString);
+
+					// }
+
 
 					if ( rawData.length ) {
 
@@ -141,7 +147,6 @@
 	var template = {
 		
 		// ToDo: Functionele animatie: let content fade-in/out
-
 		render: function(data, htmlTemplate) {
 
 			// Render template with handlebars
@@ -150,10 +155,7 @@
 			htmlElements.main.innerHTML = html;
 
 			this.detail();
-
 			spinner.stop();
-
-			this.detail();
 
 		},
 		detail: function() {
@@ -168,10 +170,12 @@
 				// call leent de methode van de array: de forEach loop
 				Array.prototype.forEach.call(songs, function(song) {
 
-					song.onclick = function(e) {
+					song.addEventListener('click', setId, true);
 
-						specificId = this.id;
-						window.location.href = window.location.href + '/:' + specificId;
+					function setId() {
+
+						var newId = this.id;
+						window.location.hash = '/:id' + newId;
 
 					}
 
@@ -182,18 +186,33 @@
 		},
 		showDetail: function(data) {
 
+			if ( data ) {
+				
 				var currentData = data;
 
-				var matchingData = [];
-				
-				_.filter(currentData, function(singleSong) {
+			} else {
 
-					if ( singleSong.id == specificId ) {
-						matchingData.push(singleSong);
-					}
+				if ( localStorage.length ) {
 
-			    });
-				template.render(matchingData[0], htmlElements.detail.innerHTML);
+					var localData = localStorage.getItem('localData');
+					var currentData = JSON.parse(localData);
+				}
+
+			}
+
+			var matchingData = [];
+			var hashId = window.location.hash.slice(5);
+
+			_.filter(currentData, function(singleSong) {
+
+				if ( singleSong.id == hashId ) {
+					matchingData.push(singleSong);
+				}
+
+		    });
+			template.render(matchingData[0], htmlElements.detail.innerHTML);
+
+			gesture.nextSong(currentData);
 
 		}
 	};
@@ -228,14 +247,57 @@
 		}
 	};
 
+	var gesture = {
+		nextSong: function(data) {
+
+			var currentData = data;
+			var songCount = 0;
+			var cache = 0;
+			var hashId = window.location.hash.slice(5);
+
+			var matchingSong = _.find(currentData, function(num) { 
+				
+				songCount ++;
+
+				if ( num.id == hashId ) {
+					
+					songCount --;
+					cache = songCount;
+
+				}
+
+			});
+
+			var swipe = new Hammer(htmlElements.main);
+
+			swipe.on('swipeleft', function() {
+
+				if ( data ) {
+					cache ++;
+					var nextSong = data[cache].id;
+					window.location.hash = '/:id' + nextSong;
+				}
+
+				htmlElements.main.classList.add('left');
+
+			});
+			swipe.on('swiperight', function() {
+				
+				if ( data ) {
+					cache --;
+					var nextSong = data[cache].id;
+					window.location.hash = '/:id' + nextSong;
+				}
+
+				htmlElements.main.classList.add('right');
+
+			});
+			
+		}
+
+	};
+
 	// start the main app
 	app.init();
 
 })();
-
-
-
-// More To Do: 
-// 				Add a gesture
-// 				Visulize the flow
-// 				Cut your code into modules

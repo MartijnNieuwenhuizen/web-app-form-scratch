@@ -84,12 +84,20 @@ header a {
 }
 
 /* NAV */
-aside {
+/*aside {
 	display: flex;
 	flex-flow: column wrap;
 	align-items: center;
 	margin: 0;
 	flex: 1.5;
+	background-color: #333333;
+}*/
+aside {
+	display: flex;
+	flex-flow: column wrap;
+	align-items: center;
+	margin: 0;
+	/*flex: 1.5;*/
 	background-color: #333333;
 }
 nav {
@@ -112,7 +120,6 @@ nav ul li {
 }
 ul li a {
 	padding: .5em .7em;
-	width: 100%;
 	display: block;
 }
 
@@ -121,7 +128,7 @@ body {
 	margin: 0;
 	padding: 0;
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: column wrap;
 }
 main {
 	display: flex;
@@ -155,22 +162,22 @@ SOUNDCLOUD
 .song-overview {
 	display: flex;
 	flex-flow: column wrap;
+	justify-content: center;
 	align-items: center;
 }
 .songs {
 	display: flex;
-	flex-flow: row no-wrap;
-	justify-content: flex-start;
+	flex-flow: column wrap;
+	justify-content: center;
 	align-items: center;
-	width: 30em;
-	height: 7em;
+	max-width: 30em;
 	margin: 1em 0; 
 	background-color: #f1f1f1;
 
 }
 figure {
-	width: 6em;
-	height: 6em;
+	max-width: 6em;
+	max-height: 6em;
 	overflow: hidden;
 	margin: .5em;
 	display: flex;
@@ -199,7 +206,6 @@ figure img {
 
 /* Search */
 #searchForm {
-	width: 80vw;
 	height: 70vh;
 	display: flex;
 	flex-flow: column wrap;
@@ -221,6 +227,7 @@ figure img {
 #searchForm input {
 	font-size: 2em;
 	padding: .3em .7em;
+	width: 4em;
 }
 #searchForm input:focus {
 	outline: 2px solid #ff5500;
@@ -235,6 +242,10 @@ figure img {
 #searchForm button:hover {
 	cursor: pointer;
 	background-color: #dd5500;
+}
+#searchForm button:focus {
+	box-shadow: 3px 3px 3px #333;
+	outline: none;
 }
 
 .errorPage h1 {
@@ -258,7 +269,47 @@ figure img {
 	height: 10em;
 }
 
+.song-detail * {
+	word-wrap: break-word;
+}
 
+
+
+/* JS */
+@keyframes fadeOut {
+	to {
+		opacity: 0;
+	}
+}
+@keyframes fadeIn {
+	to {
+		opacity: 1;
+	}
+}
+
+.fade-out {
+	animation: fadeOut 3s;
+}
+.fade-in {
+	animation: fadeIn 3s;
+}
+
+@keyframes toLeft {
+	to {
+		transform: translateX(-100px);
+	}
+}
+@keyframes toRight {
+	to {
+		transform: translateX(100px);
+	}
+}
+.left {
+	animation: toLeft .3s;
+}
+.right {
+	animation: toRight .3s;
+}
 
 
 
