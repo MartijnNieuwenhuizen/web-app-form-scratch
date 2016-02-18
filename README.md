@@ -76,3 +76,15 @@ Templating
 Underscore
 [Link naar de webpagina](http://martijnnieuwenhuizen.github.io/web-app-from-scratch/two/)
 
+**Assignment 7**
+User Feedback
+Animation
+Gesture
+Modules
+Flow
+[Link naar de webpagina](http://martijnnieuwenhuizen.github.io/web-app-from-scratch/three/)
+
+The Flow of the App:
+![flow of the app](https://github.com/MartijnNieuwenhuizen/web-app-form-scratch/blob/master/app-route/app-route.pdf "Flow of the App")
+![flow of the app](https://github.com/MartijnNieuwenhuizen/web-app-form-scratch/blob/master/app-route/app-route.png "Flow of the App")
+
