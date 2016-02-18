@@ -1,7 +1,7 @@
-var htmlElements = require('./html-elements');	
-var search = require('./search');
-var soundCloud = require('./soundcloud');
-var template = require('./template');
+var htmlElements = require('../modules/html-elements');	
+var search = require('../modules/search');
+var soundCloud = require('../modules/soundcloud');
+var template = require('../view/template');
 
 var routes = {
 	init: function() {

@@ -1,6 +1,6 @@
 var htmlElements = require('./html-elements');	
 var soundCloud = require('./soundcloud');
-var template = require('./template');
+var template = require('../view/template');
 
 var search = {
 	action: function() {

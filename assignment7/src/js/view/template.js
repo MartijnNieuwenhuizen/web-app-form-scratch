@@ -1,5 +1,5 @@
-var htmlElements = require('./html-elements');
-var gesture = require('./gesture');
+var htmlElements = require('../modules/html-elements');
+var gesture = require('../modules/gesture');
 
 // Render the templates
 var template = {

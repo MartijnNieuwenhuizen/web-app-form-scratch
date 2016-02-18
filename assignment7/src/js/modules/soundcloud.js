@@ -1,5 +1,5 @@
 var htmlElements = require('./html-elements');	
-var template = require('./template');
+var template = require('../view/template');
 var spinner = require('./spinner');
 
 var soundCloud = {

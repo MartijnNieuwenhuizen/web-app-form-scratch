@@ -2,7 +2,7 @@
 	'use strict';
 	
 	// Init Modules
-	var routes = require('./modules/routes');
+	var routes = require('./routes/routes');
 
 	var app = {
 		init: function() {
