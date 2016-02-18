@@ -1,8 +1,6 @@
 var htmlElements = require('./html-elements');
 var template = require('./template');
 
-console.dir(template);
-
 var spinner = {
 	start: function() {
 		

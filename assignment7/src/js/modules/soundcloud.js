@@ -96,16 +96,4 @@ var soundCloud = {
 
 	}
 }
-// var spinner = {
-// 	start: function() {
-		
-// 		template.render(null, htmlElements.loading.innerHTML);
-
-// 	},
-// 	stop: function() {
-
-// 		// console.log("Stop Spinner");
-
-// 	}
-// };
 module.exports = soundCloud;
