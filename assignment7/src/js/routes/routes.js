@@ -3,8 +3,8 @@ var search = require('../modules/search');
 var soundCloud = require('../modules/soundcloud');
 var template = require('../view/template');
 
-var routes = {
-	init: function() {
+var routes = (function() {
+	var init = function() {
 
 		// routers for all the elements on the page
 		routie({
@@ -31,6 +31,11 @@ var routes = {
 		});
 
 	}
-}
+	return {
+		init: init
+	}
+}());
 
 module.exports = routes;
+
+// Zet je objecten in een IFFE, en converteer de objecten naar functies, zodat je alleen de nodige functies publiekelijk maakt.
