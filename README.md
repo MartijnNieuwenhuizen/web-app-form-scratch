@@ -70,18 +70,18 @@ In main-old.js zijn i.p.v. objecten, constructoren gebruikt. Dit is voor deze el
 [Link naar de webpagina](http://martijnnieuwenhuizen.github.io/web-app-from-scratch/one/)
 
 **Assignment 6**
-Working with an API
-Routing
-Templating
-Underscore
+* Working with an API
+* Routing
+* Templating
+* Underscore
 [Link naar de webpagina](http://martijnnieuwenhuizen.github.io/web-app-from-scratch/two/)
 
 **Assignment 7**
-User Feedback
-Animation
-Gesture
-Modules
-Flow
+* User Feedback
+* Animation
+* Gesture
+* Modules
+* Flow
 [Link naar de webpagina](http://martijnnieuwenhuizen.github.io/web-app-from-scratch/three/)
 
 The Flow of the App:
