@@ -9,6 +9,9 @@ hsl(22, 52%, 32%);
 
 */
 
+* {
+	outline: 1px solid lime;
+}
 
 /* Default */
 	/* Typography */
@@ -83,7 +86,11 @@ header a {
 	margin-left: auto;
 }
 
-/* NAV */
+/*-----------------------------
+
+NAV 
+
+-----------------------------*/
 /*aside {
 	display: flex;
 	flex-flow: column wrap;
@@ -121,6 +128,7 @@ nav ul li {
 ul li a {
 	padding: .5em .7em;
 	display: block;
+	text-align: center;
 }
 
 /* BODY */

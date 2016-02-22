@@ -1,0 +1,64 @@
+@@include('./src/html/includes/_base/head.html')
+
+<main> 
+	
+	<h1>Funda</h1>
+	<button class="js-push-button">Push JS Button</button>
+
+</main>
+
+<script id="settingsForm" type="text/x-handlebars-template">
+	
+	<h1>Vind uw perfecte Huis</h1>
+	<p>
+		Vind uw perfecte huis zonder de gehele dag Funda.nl af te hoeven speuren
+	</p>
+	<p>
+		Als u hier uw voorkeuren voor uw perfecte & haalbare droomhuis invult krijgt u een push bericht elke keer als er door Funda een nieuw huis wordt toegevoegd wat aan uw criteria voldoet
+	</p>
+
+	<form action="">
+		
+		<fieldset>
+
+			<label for="city">Plaatsnaam</label>
+			<input id="city" type="text" placeholder="Plaats, wijk enz">
+
+			<label for="radius">Radius</label>
+			<span>
+				+
+				<select id="radius">
+	               	<option value = "5">5km</option>
+	               	<option value = "10">10km</option>
+	               	<option value = "15">15km</option>
+	            	<option value = "20">20km</option>
+	            	<option value = "25">25km</option>
+	            </select>
+	        </span>
+
+			<label for="max-price">Max Prijs</label>
+			<span>
+				tot
+				<select id="max-price">
+	               	<option value = "50000">€ 50.000</option>
+	               	<option value = "100000">€ 100.000</option>
+	               	<option value = "150000">€ 150.000</option>
+	               	<option value = "500000">€ 500.000</option>
+	               	<option value = "1000000">€ 1.000.000</option>
+	            </select>
+			</span>
+			
+			<div>
+				<input id="notification" type="checkbox">
+				<label for="notification">Push Notifications ontvangen</label>
+			</div>
+
+			<button type="submit" id="submit-button">Opslaan</button>
+
+		</fieldset>
+
+	</form>
+
+</script>
+	
+@@include('./src/html/includes/_base/footer.html')

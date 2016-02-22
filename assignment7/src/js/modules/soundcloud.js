@@ -4,8 +4,8 @@ var spinner = require('./spinner');
 
 var soundCloud = {
 	request: function(url) {
-
-		return new Promise(function(resolve, reject) { // Resolve = .then && Reject = .catch;
+		// used the example of David den Toom
+		return new Promise(function(resolve, reject) { // Resolve = .then / Reject = .catch;
 
 			var request = new XMLHttpRequest();
 
@@ -51,6 +51,7 @@ var soundCloud = {
 		}
 
 		this.request(soundCloudUrl)	
+			// Resolve
 			.then(function(response) {
 
 				window.rawData = JSON.parse(response);

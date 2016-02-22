@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>Single Page Web App</title>
 	<link rel="stylesheet" href="./css/styles.min.css">
 	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-	<meta charset="UTF-8">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
 	<header>
-		<a href="">Sounds Of The City</a>
+		<a href="">Songs of SoundCloud</a>
 	</header>
 
 	<aside>
@@ -41,7 +42,7 @@
 						    </figure>
 						{{/if}}
 						<div>
-							<p class="title">{{ title }}</p>
+							<h2 class="title">{{ title }}</h2>
 							<p><span>Genre:</span> {{ genre }}</p>
 						</div>
 					</li>
@@ -53,37 +54,31 @@
 	</script>
 
 	<script id="search-songs" type="text/x-handlebars-template">
-	  	
-	  	<section class="song-overview">
-			<h1>Search Results</h1>
-			<ul>
-				{{#each this}}
-					<li class="songs" id="{{ id }}">
-						{{#if artwork_url}}
-							<figure>
-								<img src="{{ artwork_url }}" alt="Artwork">
-							</figure>
-						{{else}}
-							<figure>
-						    	<img src="./img/album.png" alt="placeholder">
-						    </figure>
-						{{/if}}
-						<div>
-							<p class="title">{{ title }}</p>
-							<p><span>Genre:</span> {{ genre }}</p>
-						</div>
-					</li>
-				{{/each}}
-			</ul>
-		</section>
-		<section id="searchForm">
-			<form action="">
-				<label for="song">Search a Song:</label>
-				<input type="text" id="song" required="true">
 
-				<button id="submit">Search</button>
-			</form>
-		</section>
+		<div class="wrapper">
+		  	<section class="song-overview">
+				<h1>Search Results</h1>
+				<ul>
+					{{#each this}}
+						<li class="songs" id="{{ id }}">
+							{{#if artwork_url}}
+								<figure>
+									<img src="{{ artwork_url }}" alt="Artwork">
+								</figure>
+							{{else}}
+								<figure>
+							    	<img src="./img/album.png" alt="placeholder">
+							    </figure>
+							{{/if}}
+							<div>
+								<h2 class="title">{{ title }}</h2>
+								<p><span>Genre:</span> {{ genre }}</p>
+							</div>
+						</li>
+					{{/each}}
+				</ul>
+			</section>
+		</div>
 
 	</script>
 
@@ -99,15 +94,16 @@
 			    	<img src="img/album.png" alt="placeholder">
 			    </figure>
 			{{/if}}
-			<div>
-				<p class="title">{{ title }}</p>
+			<section>
+				<h2 class="title">{{ title }}</h2>
 				<p><span>Genre:</span> {{ genre }}</p>
-
-				{{#if stream_url}}
-					<span>{{ stream_url }}</span>
-				{{/if}}
+			</section>
+			<div>
 				{{#if stream_url}}
 					<p>{{ description }}</p>
+				{{/if}}
+				{{#if stream_url}}
+					<span>{{ stream_url }}</span>
 				{{/if}}
 			</div>
 		</section>
