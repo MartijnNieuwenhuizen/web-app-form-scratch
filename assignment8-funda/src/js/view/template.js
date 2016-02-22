@@ -9,6 +9,8 @@ var template = {
 			var html = template(data);
 			htmlElements.main.innerHTML = html;
 
+			resolve();
+
 		});
 
 		

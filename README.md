@@ -84,7 +84,7 @@ In main-old.js zijn i.p.v. objecten, constructoren gebruikt. Dit is voor deze el
 * Flow
 [Link naar de webpagina](http://martijnnieuwenhuizen.github.io/web-app-from-scratch/three/)
 
-The Flow of the App:
+**The Flow of the App:**
 ![flow of the app](https://github.com/MartijnNieuwenhuizen/web-app-form-scratch/blob/master/app-route/app-route.png "Flow of the App")
 
 **Assignment 8 - Funda**

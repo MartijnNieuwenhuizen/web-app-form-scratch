@@ -1,7 +1,7 @@
 var pushMessage = {
 	init: function() {
 		
-
+		// Divice sort Uilezen
 
 	},
 

@@ -1,7 +1,7 @@
 // 1 Functie = 1 Functionaliteit!
 
 var htmlElements = require('../modules/htmlElements');	
-var settings = require('../modules/settings');
+var userSettings = require('../modules/userSettings');
 
 var routes = {
 	init: function() {
@@ -12,7 +12,7 @@ var routes = {
 				window.location.hash = 'settings';
 			},
 			'settings': function() {
-				settings.showForm();
+				userSettings.checkLocalStorage();
 			}
 
 		});
