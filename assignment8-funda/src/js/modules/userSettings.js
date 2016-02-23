@@ -51,8 +51,8 @@ var userSettings = {
 		// ToDo: NOT ON THIS WAY!!!!!!!!
 		document.querySelector('#city').value = setSettings.city;
 		document.querySelector('#radius').value = setSettings.radius;
-		document.querySelector('#max-price').value = setSettings.maxPrice;
 		document.querySelector('#min-price').value = setSettings.minPrice;
+		document.querySelector('#max-price').value = setSettings.maxPrice;
 		document.querySelector('#notification').checked = setSettings.notification;
 
 	},
@@ -63,10 +63,13 @@ var userSettings = {
 			// ToDo: NOT ON THIS WAY!!!!!!!!
 			city: document.querySelector('#city').value,
 			radius: document.querySelector('#radius').value,
-			maxPrice: document.querySelector('#max-price').value,
 			minPrice: document.querySelector('#min-price').value,
+			maxPrice: document.querySelector('#max-price').value,
 			notification: document.querySelector('#notification').checked
 		};
+		// if ( settings.city contains a 'spatie' ) {
+		// 	replace spatie for '/'
+		// }
 
 		localStorageMod.set("userSettings", settings) // ToDo: check or input is not 'null';
 			.then(function() {
@@ -74,10 +77,13 @@ var userSettings = {
 				if ( settings.notification === true ) {
 
 					pushMessage.confirm();
+					// window.location.hash = "#personal/" + settings.city + "/" + settings.minPrice + "-" + settings.maxPrice;
+					window.location.hash = "#droomhuis/" + settings.city;
 
 				} else {
 
 					// ToDo: render next template
+					
 
 				}
 

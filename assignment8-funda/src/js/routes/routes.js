@@ -2,6 +2,8 @@
 
 var htmlElements = require('../modules/htmlElements');	
 var userSettings = require('../modules/userSettings');
+var funda = require('../modules/funda');
+var webWorker = require('../modules/webWorker');
 
 var routes = {
 	init: function() {
@@ -13,6 +15,10 @@ var routes = {
 			},
 			'settings': function() {
 				userSettings.checkLocalStorage();
+			},
+			'droomhuis/:city': function(city) {
+				funda.handleData(city);
+				webWorker.init();
 			}
 
 		});
