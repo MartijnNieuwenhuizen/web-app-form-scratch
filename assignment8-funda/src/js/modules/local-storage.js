@@ -1,7 +1,6 @@
 var localStorageMod = {
 	set: function(name, data) {
 
-		// set data
 		return new Promise(function(resolve, reject) {
 
 			var stringifiedData = JSON.stringify(data);

@@ -1,6 +1,7 @@
 var htmlElements = require('../modules/htmlElements');
 var template = require('../view/template');
 var localStorageMod = require('./local-storage');
+var pushMessage = require('./pushMessage');
 
 var userSettings = {
 	// check if there is relevant data in local storage
@@ -14,7 +15,7 @@ var userSettings = {
 			.then(function(resolve) {
 
 				var content = {
-					action: "Veranderen"
+					action: "Veranderen uw instellngen"
 				}
 				userSettings.showForm(content);
 				userSettings.retreveSettings(resolve);
@@ -23,7 +24,7 @@ var userSettings = {
 			.catch(function() {
 
 				var content = {
-					action: "Opslaan"
+					action: "Sla uw instellingen op"
 				}
 				userSettings.showForm(content);
 
@@ -51,6 +52,7 @@ var userSettings = {
 		document.querySelector('#city').value = setSettings.city;
 		document.querySelector('#radius').value = setSettings.radius;
 		document.querySelector('#max-price').value = setSettings.maxPrice;
+		document.querySelector('#min-price').value = setSettings.minPrice;
 		document.querySelector('#notification').checked = setSettings.notification;
 
 	},
@@ -62,15 +64,24 @@ var userSettings = {
 			city: document.querySelector('#city').value,
 			radius: document.querySelector('#radius').value,
 			maxPrice: document.querySelector('#max-price').value,
+			minPrice: document.querySelector('#min-price').value,
 			notification: document.querySelector('#notification').checked
 		};
 
 		localStorageMod.set("userSettings", settings) // ToDo: check or input is not 'null';
 			.then(function() {
 
-				// render next template
+				if ( settings.notification === true ) {
 
-			})
+					pushMessage.confirm();
+
+				} else {
+
+					// ToDo: render next template
+
+				}
+
+			});
 
 	}
 };

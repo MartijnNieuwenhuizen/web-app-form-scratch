@@ -1,7 +1,7 @@
 var pushMessage = require('./pushMessage');
 
 var funda = {
-	apiCall: function(url) {
+	APICall: function(url) {
 
 		return new Promise(function(resolve, reject) { // Resolve = .then / Reject = .catch;
 
@@ -31,26 +31,23 @@ var funda = {
 
 	},
 
-	connect: function() {
+	getData: function() {
 
 		url = {
 			BaseUrl: "http://funda.kyrandia.nl/feeds/Aanbod.svc",
 			key: "e2d60e885b8742d4b0648300e3703bd7",
 			example: "/?type=koop&zo=/amsterdam/west/&page=1&pagesize=25"
-
 		}
 
 		var apiUrl = url.BaseUrl + "/json/" + url.key + url.example;
 
-		this.apiCall(apiUrl)
-			// Resolve
+		this.APICall(apiUrl)
 			.then(function(response) {
 
 				var rawData = JSON.parse(response);
-				pushMessage.init();
+				// pushMessage.init();
 
 			})				
-			// Reject
 			.catch(function(err) {
 
 				console.dir("Error:", err);

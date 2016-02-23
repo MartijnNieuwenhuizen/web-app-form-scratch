@@ -57,12 +57,13 @@ button:hover {
 FORM
 
 -------------------*/
+/* ToDo: Add the focus elements! */
 form {
 	background-color: #f8b000;
 }
 fieldset {
 	display: flex;
-	flex-flow: column wrap;
+	flex-flow: row wrap;
 	border: none;
 	padding: 2em 1em;
 }
@@ -81,7 +82,7 @@ select {
     border: none;
     background-color: #fff;
     font-size: 1em;
-    width: 90%;
+    max-width: 20em;
     color: #3888C5;
 }
 form button {
@@ -100,6 +101,7 @@ form span {
 	padding: .3em .6em;
 	background-color: #fff;
 	color: #3888C5;
+	max-width: 20em;
 }
 
 form input,

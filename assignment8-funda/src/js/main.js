@@ -4,13 +4,17 @@
 	var routes = require('./routes/routes');
 
 	var app = {
-		init: function() {
+		launcher: function() {
 
 			routes.init();
 
 		}
 	}
 
-	app.init();
+	// ToDo: 
+		// Add id of every watched house to local storage -> change color layout of this houses!
+		// Change push message to Google Push Notification if the user has a Android device (optional)
+
+	app.launcher();
 
 })();
