@@ -1,3 +1,6 @@
+var dataFilter = require('../modules/dataFilter');
+var funda = require('../modules/funda');
+
 // Persoonlijker maken -> elke keer als openen
 // Divice sort Uilezen -> Krijn
 var pushMessage = {
@@ -39,9 +42,13 @@ var pushMessage = {
 
 	},
 
-	getNewHouses: function() {
+	pushNewHouses: function() {
 
-		
+		funda.returnData()
+			.then(dataFilter.devideHouses)
+			.then(function(response) {
+				console.log(response);
+			})
 
 	}
 };

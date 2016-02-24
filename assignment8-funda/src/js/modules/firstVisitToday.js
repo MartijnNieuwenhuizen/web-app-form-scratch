@@ -27,12 +27,12 @@ var firstVisitToday = {
 					if ( today > localStorageDate ) {
 
 						firstVisitToday.setNewDate(today);
-						pushMessage.getNewHouses();
+						// pushMessage.getNewHouses();
 
 					} else if ( today === localStorageDate ){
 
-						console.log("already fisited today");
-						pushMessage.getNewHouses();
+						console.log("already visited today");
+						pushMessage.pushNewHouses();
 
 					} else {
 

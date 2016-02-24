@@ -1,13 +1,8 @@
 var htmlElements = require('./htmlElements');
+var funda = require('./funda');
 var template = require('../view/template');
 
 var dataFilter = {
-	getAllHouses: function(data) {
-
-		var _data = data;
-		this.devideHouses(_data);
-
-	},
 	devideHouses: function(data) {
 
 		var _data = data;
@@ -30,7 +25,7 @@ var dataFilter = {
 		   
 		});
 
-		this.combineData(_data, addedToday, notAddedToday);
+		return dataFilter.combineData(_data, addedToday, notAddedToday);
 
 	},
 	combineData: function(data, addedToday, notAddedToday) {
@@ -49,7 +44,8 @@ var dataFilter = {
 			houses: allHouses
 		}
 
-		template.render(htmlElements.houseList.innerHTML, content);
+		// template.render(htmlElements.houseList.innerHTML, content);
+		return content;
 
 	}
 };

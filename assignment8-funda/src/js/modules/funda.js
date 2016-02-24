@@ -2,7 +2,6 @@ var pushMessage = require('./pushMessage');
 var htmlElements = require('./htmlElements');
 var localStorageMod = require('./local-storage');
 var template = require('../view/template');
-var dataFilter = require('./dataFilter');
 
 var funda = {
 	// The call to the API
@@ -72,46 +71,30 @@ var funda = {
 		};
 
 	},
-	// Retreve data from API
-	getData: function(settings) {
-		// get api url
-		var apiUrl = funda.APIUrl(settings);
-		// make api call
-		funda.APICall(apiUrl)
-			.then(function(response) {
-				// store data
-				var rawData = JSON.parse(response);
-				// show data of houses
-
-				if ( rawData.TotaalAantalObjecten === 0) {
-
-					// template.render() -> nu geen huizen in dit criteria
-					console.log("nu geen huizen in dit criteria");
-
-				} else {
-
-					dataFilter.getAllHouses(rawData);
-
-				}
-
-			})	
-			.catch(function(err) {
-
-				console.log("Error:", err);
-
-			});
-
-	},
 	// handle Data
-	handleData: function(data) {
+	returnData: function() {
 
-		// retreve userSettings
-		localStorageMod.get("userSettings")
-			.then(function(resolve) {
-				
-				funda.getData(resolve);
+		return new Promise(function(resolve, reject) {
 
-			});
+			// retreve userSettings
+			var rawData = localStorageMod.get("userSettings")
+				.then(funda.APIUrl)
+				.then(funda.APICall)
+				.then(function(data) {
+
+					rawData = JSON.parse(data);	
+					if ( rawData.TotaalAantalObjecten === 0) { return false; }
+					return rawData
+
+				})
+				.catch(function(err) {
+					console.error((err.stack) ? err.stack : err);
+				});
+
+			
+			return resolve(rawData);
+
+		});
 
 	}
 };

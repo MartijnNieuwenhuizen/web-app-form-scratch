@@ -1,8 +1,8 @@
 // 1 Functie = 1 Functionaliteit!
-
 var htmlElements = require('../modules/htmlElements');	
 var userSettings = require('../modules/userSettings');
 var funda = require('../modules/funda');
+var dataFilter = require('../modules/dataFilter');
 
 var routes = {
 	init: function() {
@@ -15,8 +15,13 @@ var routes = {
 			'settings': function() {
 				userSettings.checkLocalStorage();
 			},
-			'droomhuis/:city': function(city) {
-				funda.handleData(city);
+			'droomhuis/:city': function() {
+				funda.returnData()
+					.then(function(resolve) {
+
+						dataFilter.devideHouses(resolve);
+						
+					});
 			}
 
 		});
