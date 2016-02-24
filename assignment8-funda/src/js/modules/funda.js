@@ -2,6 +2,7 @@ var pushMessage = require('./pushMessage');
 var htmlElements = require('./htmlElements');
 var localStorageMod = require('./local-storage');
 var template = require('../view/template');
+var dataFilter = require('./dataFilter');
 
 var funda = {
 	// The call to the API
@@ -45,9 +46,9 @@ var funda = {
 				key: "e2d60e885b8742d4b0648300e3703bd7",
 				type: "type=koop",
 				city: _settings.city,
+				radius: _settings.radius,
 				minPrice: _settings.minPrice,
 				maxPrice: _settings.maxPrice,
-				radius: _settings.radius,
 				pageNumber: "&page=1",
 				pageSize: "&pagesize=25",
 				new: _settings.new
@@ -56,11 +57,11 @@ var funda = {
 			if ( _settings.new ) {
 
 				url.new = _settings.new;
-				return apiUrl = url.BaseUrl + "/json/" + url.key + "/?" + url.type + "&zo=/" + url.city + "/" + url.minPrice + "-" + url.maxPrice + "/" + url.new;
+				return apiUrl = url.BaseUrl + "/json/" + url.key + "/?" + url.type + "&zo=/" + url.city + "/+" + url.radius + "km/" + url.minPrice + "-" + url.maxPrice + "/" + url.new;
 
 			} else {
 
-				return apiUrl = url.BaseUrl + "/json/" + url.key + "/?" + url.type + "&zo=/" + url.city + "/" + url.minPrice + "-" + url.maxPrice + "/" + url.pageNumber + url.pageSize;
+				return apiUrl = url.BaseUrl + "/json/" + url.key + "/?" + url.type + "&zo=/" + url.city + "/+" + url.radius + "km/" + + url.minPrice + "-" + url.maxPrice + "/" + url.pageNumber + url.pageSize;
 
 			};
 
@@ -81,7 +82,17 @@ var funda = {
 				// store data
 				var rawData = JSON.parse(response);
 				// show data of houses
-				funda.showHouses(rawData);
+
+				if ( rawData.TotaalAantalObjecten === 0) {
+
+					// template.render() -> nu geen huizen in dit criteria
+					console.log("nu geen huizen in dit criteria");
+
+				} else {
+
+					dataFilter.getAllHouses(rawData);
+
+				}
 
 			})	
 			.catch(function(err) {
@@ -99,27 +110,6 @@ var funda = {
 			.then(function(resolve) {
 				
 				funda.getData(resolve);
-
-			});
-
-	},
-	// show the matching houses
-	showHouses: function(data) {
-
-		template.render(htmlElements.houseList.innerHTML, data);
-
-	},
-	// Check houses added today
-	checkHousesAddedToday: function() {
-
-		localStorageMod.get("userSettings")
-			.then(function(resolve) {
-
-				// add the key: new to the obj
-				var settings = resolve;
-				settings.new = "1-dag";
-				
-				funda.getData(settings);
 
 			});
 

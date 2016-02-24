@@ -122,12 +122,16 @@
 <script id="houseList" type="text/x-handlebars-template">
 
 	<section class="your-houses">
-		<h1> {{ this.TotaalAantalObjecten }} mogelijke Droomhuizen</h1>
-		<p>X nieuwe huizen</p>
+		<h1> {{ meta.total }} mogelijke Droomhuizen</h1>
+		<p>{{ meta.totalToday }} nieuwe huizen</p>
 
 		<ul class="house-list">
-		{{#each this.Objects}}
+		{{#each this.houses}}
+		{{#if today }}
+		    <li class="addded-today">
+		{{else}}
 			<li>
+		{{/if}}
 				<a href="{{ URL }}">
 					<p>{{ Adres }}</p>
 					<img src="{{ FotoSecure }}" alt="afbeelding van het huis">

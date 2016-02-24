@@ -61,7 +61,7 @@ var userSettings = {
 
 		settings = {
 			// ToDo: NOT ON THIS WAY!!!!!!!!
-			city: document.querySelector('#city').value,
+			city: document.querySelector('#city').value.toLowerCase(),
 			radius: document.querySelector('#radius').value,
 			minPrice: document.querySelector('#min-price').value,
 			maxPrice: document.querySelector('#max-price').value,
@@ -76,8 +76,7 @@ var userSettings = {
 
 				if ( settings.notification === true ) {
 
-					pushMessage.confirm();
-					// window.location.hash = "#personal/" + settings.city + "/" + settings.minPrice + "-" + settings.maxPrice;
+					// pushMessage.confirm();
 					window.location.hash = "#droomhuis/" + settings.city;
 
 				} else {

@@ -1,3 +1,4 @@
+// Persoonlijker maken -> elke keer als openen
 // Divice sort Uilezen -> Krijn
 var pushMessage = {
 	// allow pushMesages in Chrome
@@ -35,6 +36,12 @@ var pushMessage = {
 		  window.open(_content.link);
 		  
 		};
+
+	},
+
+	getNewHouses: function() {
+
+		
 
 	}
 };

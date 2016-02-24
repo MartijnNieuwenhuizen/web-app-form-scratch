@@ -77,6 +77,7 @@ input {
 label {
 	display: none;
 	color: #fff;
+	-webkit-appearance: none; 
 }
 select {
     border: none;
@@ -110,7 +111,9 @@ form span {
 }
 
 
-
+.addded-today {
+	background-color: lime;
+}
 
 
 
