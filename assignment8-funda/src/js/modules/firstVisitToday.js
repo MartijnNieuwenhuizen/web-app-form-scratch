@@ -10,35 +10,22 @@ var firstVisitToday = {
 		var mm = date.getMonth() +1;
 		var yyyy = date.getFullYear();
 
-		// var today = {
-		// 	mm: mm,
-		// 	dd: dd,
-		// 	yyyy: yyyy,
-		// }
 		var today = mm +'/' + dd + '/' + yyyy;
 
 		localStorageMod.get('today')
-			.then(function(resolve) {
+			.then(function(localStorageDate) {
 				
-				if ( resolve ) {
-
-					var localStorageDate = resolve;
+				if ( localStorageDate ) {
 
 					if ( today > localStorageDate ) {
 
-						firstVisitToday.setNewDate(today);
-						// pushMessage.getNewHouses();
-
-					} else if ( today === localStorageDate ){
-
-						console.log("already visited today");
 						pushMessage.pushNewHouses();
 
-					} else {
-
-						firstVisitToday.setNewDate(today);
-
 					}
+					
+					pushMessage.pushNewHouses(); // for development purposes
+					firstVisitToday.setNewDate(today);
+
 
 				} else {
 

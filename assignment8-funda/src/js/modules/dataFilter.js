@@ -1,4 +1,7 @@
 var dataFilter = {
+
+	// ToDo: api url part newest first instead of this? Then there is also paginering :)
+
 	devideHouses: function(data) {
 
 		return new Promise(function(resolve, reject) {

@@ -122,6 +122,11 @@ form span {
 SPINNER
 
 ------------------------*/
+/*
+
+make spinner in funda colors!
+
+*/
 .loading {
 	display: flex;
 	flex-flow: column wrap;

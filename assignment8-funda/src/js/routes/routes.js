@@ -29,6 +29,7 @@ var routes = {
 					});
 			},
 			'droomhuis/:city': function() {
+				// Joost vragen -> wat te doen met al deze actie hier? een display.newHouses & display.allHouses maken???????????
 				spinner.start();
 				funda.returnAllHouses()
 					.then(function(data) {

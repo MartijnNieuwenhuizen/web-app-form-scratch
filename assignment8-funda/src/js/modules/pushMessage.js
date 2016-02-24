@@ -1,10 +1,11 @@
 var dataFilter = require('../modules/dataFilter');
 var funda = require('../modules/funda');
+var localStorageMod = require('../modules/local-storage');
 
 // Persoonlijker maken -> elke keer als openen
 // Divice sort Uilezen -> Krijn
 var pushMessage = {
-	// allow pushMesages in Chrome
+	
 	confirm: function() {
 		
 		if ( Notification.permission !== 'granted' ) {
@@ -13,7 +14,7 @@ var pushMessage = {
 
 		} else {
 
-			content = {
+			var content = {
 				title: "Gelukt",
 				body: "Bekijk hier het volledige aanbod",
 				icon: "../img/funda-logo.png",
@@ -42,9 +43,40 @@ var pushMessage = {
 
 	},
 
+	// ToDo: Push Message Stylen!!!!!!!!!!!!!!!!!!!!!!
+
 	pushNewHouses: function() {
 
-		
+		funda.returnNewHouses()
+			.then(function(data) {
+
+				if ( data.length ) {
+
+					// get local storage title of city
+					localStorageMod.get('userSettings')
+					.then(function(userSettings) {
+
+						var _userSettings = userSettings;
+
+						var totalNewHouses = data.length;
+						var content = {
+							body: "zie meer!",
+							icon: data[0].Foto,
+							link: "/#droomhuis-vandaag/" + _userSettings.city
+						};
+						if ( data.length > 1 ) {
+							content.title = "Er zijn vandaag " + data.length + " nieuwe mogelijke droomhuizen toegevoegd";
+						} else {
+							content.title = "Er is vandaag 1 nieuw mogelijk droomhuis toegevoegd";
+						}
+
+						pushMessage.showNotification(content);
+
+					});
+
+				}
+
+			});
 
 	}
 };
