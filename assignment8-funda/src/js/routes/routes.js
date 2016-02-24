@@ -4,6 +4,7 @@ var userSettings = require('../modules/userSettings');
 var funda = require('../modules/funda');
 var dataFilter = require('../modules/dataFilter');
 var template = require('../view/template');
+var spinner = require('../modules/spinner');
 
 var routes = {
 	init: function() {
@@ -11,12 +12,15 @@ var routes = {
 		routie({
 			
 			'': function() {
+				spinner.start();
 				window.location.hash = 'settings';
 			},
 			'settings': function() {
+				spinner.start();
 				userSettings.checkLocalStorage();
 			},
 			'droomhuis-vandaag/:city': function() {
+				spinner.start();
 				funda.returnNewHouses()
 					.then(function(data) {
 
@@ -25,6 +29,7 @@ var routes = {
 					});
 			},
 			'droomhuis/:city': function() {
+				spinner.start();
 				funda.returnAllHouses()
 					.then(function(data) {
 

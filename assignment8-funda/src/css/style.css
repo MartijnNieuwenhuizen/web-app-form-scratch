@@ -117,4 +117,22 @@ form span {
 
 
 
+/*------------------------
+
+SPINNER
+
+------------------------*/
+.loading {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	align-items: center;
+}
+.loading img {
+	align-self: center;
+	width: 10em;
+	height: 10em;
+}
+
+
 
