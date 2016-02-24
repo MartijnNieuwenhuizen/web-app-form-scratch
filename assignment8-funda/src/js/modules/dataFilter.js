@@ -1,55 +1,107 @@
-var htmlElements = require('./htmlElements');
-var funda = require('./funda');
-var template = require('../view/template');
-
 var dataFilter = {
 	devideHouses: function(data) {
 
-		var _data = data;
-		var houseData = data.Objects;
-		var addedToday = [];
-		var notAddedToday = [];
+		return new Promise(function(resolve, reject) {
 
-		_.filter(houseData, function(matched) {
+			var _data = data;
+			var houseData = _data.Objects;
+			var addedToday = [];
+			var notAddedToday = [];
 
-			if( matched.AangebodenSindsTekst === "Vandaag" ) {
+			_.filter(houseData, function(matched) {
 
-				matched.today = true;
-				addedToday.push(matched);
+				if ( matched.AangebodenSindsTekst === "Vandaag" ) {
 
-			} else {
+					matched.today = true;
+					addedToday.push(matched);
 
-				notAddedToday.push(matched);		    	
+				} else {
 
+					notAddedToday.push(matched);		    	
+
+				};
+			   
+			});
+
+			var cobinedData = {
+				data: _data,
+				addedToday: addedToday,
+				notAddedToday: notAddedToday
 			}
-		   
+
+			resolve(cobinedData);
+
 		});
 
-		return dataFilter.combineData(_data, addedToday, notAddedToday);
+	},
+
+	filterNewHouses: function(data) {
+
+		return new Promise(function(resolve, reject) {
+
+			var _data = data;
+			var houseData = _data.Objects;
+			var addedToday = [];
+
+			_.filter(houseData, function(matched) {
+
+				if ( matched.AangebodenSindsTekst === "Vandaag" ) {
+
+					matched.today = true;
+					addedToday.push(matched);
+
+				}
+			   
+			});
+
+			resolve(addedToday);
+
+		});
 
 	},
-	combineData: function(data, addedToday, notAddedToday) {
 
-		var _data = data;
+	combineHousesData: function(combinedData) {
 
-		var meta = {
-			total: _data.TotaalAantalObjecten,
-			totalToday: addedToday.length,
-		}
+		var _combinedData = combinedData;
+		var _data = _combinedData.data;
+		var _addedToday = _combinedData.addedToday;
+		var _notAddedToday = _combinedData.notAddedToday;
 
-		var allHouses = addedToday.concat(notAddedToday);
+		return new Promise(function(resolve, reject) {
 
-		var content = {
-			meta: meta,
-			houses: allHouses
-		}
+			var meta = {
+				total: _data.TotaalAantalObjecten,
+				totalToday: _addedToday.length,
+			}
 
-		// template.render(htmlElements.houseList.innerHTML, content);
-		return content;
+			var allHouses = _addedToday.concat(_notAddedToday);
+
+			var content = {
+				meta: meta,
+				houses: allHouses
+			}
+
+			resolve(content);
+
+		});
+
+	},
+
+	returnAllHouses: function(data) {
+
+		return new Promise(function(resolve, reject) {
+
+			dataFilter.devideHouses(data)
+				.then(dataFilter.combineHousesData)
+				.then(function(combinedData) {
+					
+					resolve(combinedData);
+
+				});
+
+		});
 
 	}
 };
-
-// template.render(htmlElements.houseList.innerHTML, data);
 
 module.exports = dataFilter;

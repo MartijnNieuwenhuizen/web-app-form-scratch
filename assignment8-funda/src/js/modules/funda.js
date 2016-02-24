@@ -1,6 +1,7 @@
 var pushMessage = require('./pushMessage');
 var htmlElements = require('./htmlElements');
 var localStorageMod = require('./local-storage');
+var dataFilter = require('./dataFilter');
 var template = require('../view/template');
 
 var funda = {
@@ -72,7 +73,7 @@ var funda = {
 
 	},
 	// handle Data
-	returnData: function() {
+	returnAllData: function() {
 
 		return new Promise(function(resolve, reject) {
 
@@ -84,15 +85,45 @@ var funda = {
 
 					rawData = JSON.parse(data);	
 					if ( rawData.TotaalAantalObjecten === 0) { return false; }
-					return rawData
+
+					resolve(rawData);
 
 				})
 				.catch(function(err) {
 					console.error((err.stack) ? err.stack : err);
 				});
 
-			
-			return resolve(rawData);
+		});
+
+	},
+
+	returnNewHouses: function() {
+
+		return new Promise(function(resolve, reject) {
+
+			var data = funda.returnAllData()
+				.then(dataFilter.filterNewHouses)
+				.then(function(filteredData) {
+
+					resolve(filteredData);
+
+				});
+
+		});
+
+	},
+
+	returnAllHouses: function() {
+
+		return new Promise(function(resolve, reject) {
+
+			var data = funda.returnAllData()
+				.then(dataFilter.returnAllHouses)
+				.then(function(filteredData) {
+
+					resolve(filteredData);
+
+				});
 
 		});
 

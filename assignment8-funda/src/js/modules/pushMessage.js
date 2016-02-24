@@ -44,11 +44,7 @@ var pushMessage = {
 
 	pushNewHouses: function() {
 
-		funda.returnData()
-			.then(dataFilter.devideHouses)
-			.then(function(response) {
-				console.log(response);
-			})
+		
 
 	}
 };

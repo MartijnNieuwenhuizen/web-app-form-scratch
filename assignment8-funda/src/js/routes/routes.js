@@ -3,6 +3,7 @@ var htmlElements = require('../modules/htmlElements');
 var userSettings = require('../modules/userSettings');
 var funda = require('../modules/funda');
 var dataFilter = require('../modules/dataFilter');
+var template = require('../view/template');
 
 var routes = {
 	init: function() {
@@ -15,12 +16,20 @@ var routes = {
 			'settings': function() {
 				userSettings.checkLocalStorage();
 			},
-			'droomhuis/:city': function() {
-				funda.returnData()
-					.then(function(resolve) {
+			'droomhuis-vandaag/:city': function() {
+				funda.returnNewHouses()
+					.then(function(data) {
 
-						dataFilter.devideHouses(resolve);
-						
+						template.render(htmlElements.newHouses.innerHTML, data);
+
+					});
+			},
+			'droomhuis/:city': function() {
+				funda.returnAllHouses()
+					.then(function(data) {
+
+						template.render(htmlElements.houseList.innerHTML, data);
+
 					});
 			}
 

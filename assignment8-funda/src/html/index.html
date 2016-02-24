@@ -2,8 +2,7 @@
 
 <main> 
 	
-	<h1>Funda</h1>
-	<button class="js-push-button">Push JS Button</button>
+	
 
 </main>
 
@@ -116,6 +115,31 @@
 		</fieldset>
 
 	</form>
+
+</script>
+
+<script id="new-houses" type="text/x-handlebars-template">
+
+	<section class="your-houses">
+		<p>{{ meta.totalToday }} nieuwe huizen</p>
+
+		<ul class="house-list">
+		{{#each this}}
+		{{#if today }}
+		    <li class="addded-today">
+		{{else}}
+			<li>
+		{{/if}}
+				<a href="{{ URL }}">
+					<p>{{ Adres }}</p>
+					<img src="{{ FotoSecure }}" alt="afbeelding van het huis">
+					<p>€ {{ Koopprijs }}</p>
+					<p>{{ Discription }}</p>
+				</a>
+			</li>
+		{{/each}}
+		</ul>
+	</section>
 
 </script>
 
