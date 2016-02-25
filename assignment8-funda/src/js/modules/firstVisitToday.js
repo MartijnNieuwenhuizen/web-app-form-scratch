@@ -22,7 +22,7 @@ var firstVisitToday = {
 						pushMessage.pushNewHouses();
 
 					}
-					
+							
 					pushMessage.pushNewHouses(); // for development purposes
 					firstVisitToday.setNewDate(today);
 

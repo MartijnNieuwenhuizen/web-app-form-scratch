@@ -21,6 +21,7 @@ var userSettings = {
 				userSettings.retreveSettings(resolve);
 
 			})
+			// ToDo: Fix Bug
 			.catch(function() {
 
 				var content = {

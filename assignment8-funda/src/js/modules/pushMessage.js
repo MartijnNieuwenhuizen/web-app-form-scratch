@@ -36,8 +36,16 @@ var pushMessage = {
 		});
 
 		notification.onclick = function() {
-		  
-		  window.open(_content.link);
+
+			if ( _content.link != null ) {
+
+				window.open(_content.link);
+
+			} else {
+
+				notification.close();
+
+			}
 		  
 		};
 
@@ -73,6 +81,17 @@ var pushMessage = {
 						pushMessage.showNotification(content);
 
 					});
+
+				} else {
+
+					var content = {
+						title: "Helaas",
+						body: "Er zijn vandaag geen niewe droomhuizen toegevoegd",
+						icon: "../img/funda.png",
+						link: null
+					};
+
+					pushMessage.showNotification(content);
 
 				}
 

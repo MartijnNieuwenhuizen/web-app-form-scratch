@@ -90,7 +90,9 @@ var funda = {
 
 				})
 				.catch(function(err) {
+
 					console.error((err.stack) ? err.stack : err);
+					
 				});
 
 		});

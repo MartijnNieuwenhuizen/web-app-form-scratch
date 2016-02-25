@@ -1,3 +1,5 @@
+var localStorageMod = require('../modules/local-storage');
+
 var dataFilter = {
 
 	// ToDo: api url part newest first instead of this? Then there is also paginering :)
@@ -72,19 +74,28 @@ var dataFilter = {
 
 		return new Promise(function(resolve, reject) {
 
-			var meta = {
-				total: _data.TotaalAantalObjecten,
-				totalToday: _addedToday.length,
-			}
+			localStorageMod.get('userSettings')
+			.then(function(userSettings) {
+				
+				var _userSettings = userSettings;
 
-			var allHouses = _addedToday.concat(_notAddedToday);
+				var meta = {
+					city: _userSettings.city,
+					budget: "€" + _userSettings.minPrice + " - €" + _userSettings.maxPrice,
+					total: _data.TotaalAantalObjecten,
+					totalToday: _addedToday.length,
+				}
 
-			var content = {
-				meta: meta,
-				houses: allHouses
-			}
+				var allHouses = _addedToday.concat(_notAddedToday);
 
-			resolve(content);
+				var content = {
+					meta: meta,
+					houses: allHouses
+				}
+
+				resolve(content);
+
+			});
 
 		});
 
