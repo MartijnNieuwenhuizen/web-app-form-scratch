@@ -7,6 +7,7 @@ var localStorageMod = {
 			localStorage.setItem(name, stringifiedData);
 
 			resolve();
+			reject();
 
 		});
 

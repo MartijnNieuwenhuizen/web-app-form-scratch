@@ -39,7 +39,7 @@ var pushMessage = {
 
 			if ( _content.link != null ) {
 
-				window.open(_content.link);
+				window.location.hash = '#droomhuis-vandaag/:city';
 
 			} else {
 
@@ -51,8 +51,6 @@ var pushMessage = {
 
 	},
 
-	// ToDo: Push Message Stylen!!!!!!!!!!!!!!!!!!!!!!
-
 	pushNewHouses: function() {
 
 		funda.returnNewHouses()
@@ -60,7 +58,6 @@ var pushMessage = {
 
 				if ( data.length ) {
 
-					// get local storage title of city
 					localStorageMod.get('userSettings')
 					.then(function(userSettings) {
 
@@ -73,9 +70,9 @@ var pushMessage = {
 							link: "/#droomhuis-vandaag/" + _userSettings.city
 						};
 						if ( data.length > 1 ) {
-							content.title = "Er zijn vandaag " + data.length + " nieuwe mogelijke droomhuizen toegevoegd";
+							content.title = "Er zijn vandaag " + data.length + " nieuwe mogelijke droomhuizen toegevoegd in " + _userSettings.city;
 						} else {
-							content.title = "Er is vandaag 1 nieuw mogelijk droomhuis toegevoegd";
+							content.title = "Er is vandaag 1 nieuw mogelijk droomhuis toegevoegd in " + _userSettings.city;
 						}
 
 						pushMessage.showNotification(content);

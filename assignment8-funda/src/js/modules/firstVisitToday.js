@@ -34,6 +34,13 @@ var firstVisitToday = {
 				}
 
 			})
+			.catch(function() {
+
+				console.log("FOOOO");
+
+				firstVisitToday.setNewDate(today);
+
+			});
 
 	},
 	setNewDate: function(today) {

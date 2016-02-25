@@ -109,7 +109,7 @@
 <script id="new-houses" type="text/x-handlebars-template">
 
 	<section class="your-houses">
-		<p>{{ meta.totalToday }} nieuwe huizen</p>
+		<h1>Vandaag toegevoegd in jouw catagorie</h1>
 
 		<ul class="house-list">
 		{{#each this}}
@@ -119,10 +119,10 @@
 			<li>
 		{{/if}}
 				<a href="{{ URL }}">
-					<p>{{ Adres }}</p>
-					<img src="{{ FotoSecure }}" alt="afbeelding van het huis">
-					<p>€ {{ Koopprijs }}</p>
-					<p>{{ Discription }}</p>
+					<figure>
+						<img src="{{ FotoLargest }}" alt="afbeelding van het huis">
+						<figcaption><span>{{ Adres }}</span> <span>€ {{ Koopprijs }}</span></figcaption>	
+					</figure>
 				</a>
 			</li>
 		{{/each}}

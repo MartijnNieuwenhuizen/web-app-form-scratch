@@ -13,7 +13,7 @@ var routes = {
 			
 			'': function() {
 				spinner.start();
-				window.location.hash = 'settings';
+				window.location.hash = '#droomhuis/city';
 			},
 			'settings': function() {
 				spinner.start();
@@ -28,6 +28,7 @@ var routes = {
 
 					});
 			},
+			// Homepage toevoegen, dit moet niet de instellingen zijn!
 			'droomhuis/:city': function() {
 				// Joost vragen -> wat te doen met al deze actie hier? een display.newHouses & display.allHouses maken???????????
 				spinner.start();

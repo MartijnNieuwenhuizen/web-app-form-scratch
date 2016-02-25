@@ -108,6 +108,8 @@ var dataFilter = {
 			dataFilter.devideHouses(data)
 				.then(dataFilter.combineHousesData)
 				.then(function(combinedData) {
+
+					console.log(combinedData);
 					
 					resolve(combinedData);
 

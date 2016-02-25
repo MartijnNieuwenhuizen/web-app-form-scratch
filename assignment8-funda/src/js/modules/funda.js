@@ -84,7 +84,11 @@ var funda = {
 				.then(function(data) {
 
 					rawData = JSON.parse(data);	
-					if ( rawData.TotaalAantalObjecten === 0) { return false; }
+					if ( rawData.TotaalAantalObjecten === 0) { 
+
+						// Error handling maken als er gaan matches zijn gevonden!
+						
+					}
 
 					resolve(rawData);
 
@@ -109,6 +113,11 @@ var funda = {
 
 					resolve(filteredData);
 
+				})
+				.catch(function(err) {
+
+					console.error((err.stack) ? err.stack : err);
+
 				});
 
 		});
@@ -125,6 +134,11 @@ var funda = {
 
 					resolve(filteredData);
 
+				})
+				.catch(function(err) {
+
+					console.error((err.stack) ? err.stack : err);
+					
 				});
 
 		});
