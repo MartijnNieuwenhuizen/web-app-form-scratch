@@ -1,10 +1,6 @@
-// 1 Functie = 1 Functionaliteit!
 var htmlElements = require('../modules/htmlElements');	
-var userSettings = require('../modules/userSettings');
-var funda = require('../modules/funda');
-var dataFilter = require('../modules/dataFilter');
 var template = require('../view/template');
-var spinner = require('../modules/spinner');
+var assembleComponents = require('../modules/assembleComponents');
 
 var routes = {
 	init: function() {
@@ -12,33 +8,20 @@ var routes = {
 		routie({
 			
 			'': function() {
-				spinner.start();
-				window.location.hash = '#droomhuis/city';
+				window.location.hash = '#thuis/city';
 			},
 			'settings': function() {
-				spinner.start();
-				userSettings.checkLocalStorage();
+				assembleComponents.settings();
 			},
-			'droomhuis-vandaag/:city': function() {
-				spinner.start();
-				funda.returnNewHouses()
-					.then(function(data) {
-
-						template.render(htmlElements.newHouses.innerHTML, data);
-
-					});
+			'thuis-vandaag/:city': function() {
+				assembleComponents.newHouses();	
 			},
-			// Homepage toevoegen, dit moet niet de instellingen zijn!
-			'droomhuis/:city': function() {
-				// Joost vragen -> wat te doen met al deze actie hier? een display.newHouses & display.allHouses maken???????????
-				spinner.start();
-				funda.returnAllHouses()
-					.then(function(data) {
-
-						template.render(htmlElements.houseList.innerHTML, data);
-
-					});
-			}
+			'thuis/:city': function() {
+				assembleComponents.allHouses();		
+			},
+			'*': function() {
+				assembleComponents.error();
+			}	
 
 		});
 

@@ -12,14 +12,8 @@ var funda = {
 
 			var request = new XMLHttpRequest();
 
-			request.onloadstart = function() {
-
-				// Isert Spinner
-
-			}
 			request.onloadend = function(response) {
 
-				// put data in the resolve of the promise
 				resolve(request.response);
 
 			}
@@ -86,7 +80,11 @@ var funda = {
 					rawData = JSON.parse(data);	
 					if ( rawData.TotaalAantalObjecten === 0) { 
 
-						// Error handling maken als er gaan matches zijn gevonden!
+						var content = {
+		    				title: "Geen Matches",
+		    				message: "Sorry, er zijn geen huizen gevonden in deze catagorie"
+		    			}
+		    			template.render(htmlElements.error.innerHTML, content);
 						
 					}
 
@@ -95,7 +93,7 @@ var funda = {
 				})
 				.catch(function(err) {
 
-					console.error((err.stack) ? err.stack : err);
+					window.location.hash = '#settings';
 					
 				});
 

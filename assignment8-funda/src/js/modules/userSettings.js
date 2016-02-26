@@ -7,10 +7,6 @@ var userSettings = {
 	// check if there is relevant data in local storage
 	checkLocalStorage: function() {
 
-		// check if localStorage had data
-			// yes -> show and content: Verander + load template
-			// no -> load template
-
 		localStorageMod.get('userSettings')
 			.then(function(resolve) {
 
@@ -21,7 +17,6 @@ var userSettings = {
 				userSettings.retreveSettings(resolve);
 
 			})
-			// ToDo: Fix Bug
 			.catch(function() {
 
 				var content = {
@@ -36,7 +31,7 @@ var userSettings = {
 	// Call render function and get button
 	showForm: function(content) {
 
-		template.render(htmlElements.settingsForm.innerHTML, content) // ToDo: Animation to let the user see the content had changed
+		template.render(htmlElements.settingsForm.innerHTML, content)
 		.then(function() {
 
 			var submitButton = document.querySelector('#submit-button');
@@ -61,29 +56,23 @@ var userSettings = {
 	saveSettings: function() {
 
 		settings = {
-			// ToDo: NOT ON THIS WAY!!!!!!!!
 			city: document.querySelector('#city').value.toLowerCase(),
 			radius: document.querySelector('#radius').value,
 			minPrice: document.querySelector('#min-price').value,
 			maxPrice: document.querySelector('#max-price').value,
 			notification: document.querySelector('#notification').checked
 		};
-		// if ( settings.city contains a 'spatie' ) {
-		// 	replace spatie for '/'
-		// }
 
-		localStorageMod.set("userSettings", settings) // ToDo: check or input is not 'null';
+		localStorageMod.set("userSettings", settings)
 			.then(function() {
 
-				if ( settings.notification === true ) {
+				if ( Notification.permission === 'granted' ) {
 
-					// pushMessage.confirm();
-					window.location.hash = "#droomhuis/" + settings.city;
+					window.location.hash = "#thuis/" + settings.city;
 
 				} else {
 
-					// ToDo: render next template
-					
+					pushMessage.confirm();
 
 				}
 

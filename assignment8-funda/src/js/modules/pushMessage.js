@@ -2,27 +2,28 @@ var dataFilter = require('../modules/dataFilter');
 var funda = require('../modules/funda');
 var localStorageMod = require('../modules/local-storage');
 
-// Persoonlijker maken -> elke keer als openen
-// Divice sort Uilezen -> Krijn
 var pushMessage = {
 	
 	confirm: function() {
-		
-		if ( Notification.permission !== 'granted' ) {
 				
-			Notification.requestPermission();
+		new Promise(function(resolve, reject) {
 
-		} else {
+			Notification.requestPermission();
+			return resolve();	
+
+		}).then(function() {
 
 			var content = {
 				title: "Gelukt",
-				body: "Bekijk hier het volledige aanbod",
+				body: "Elke dag krijgt u een push notificatie met passende huizen die zijn toegevoegd terwijl u sliep ",
 				icon: "../img/funda-logo.png",
-				link: "http://www.funda.nl"
+				link: null
 			}
 			this.showNotification(content);
+			window.location.hash = "#thuis/" + settings.city;
 
-		}
+		});
+
 
 	},
 
@@ -39,7 +40,7 @@ var pushMessage = {
 
 			if ( _content.link != null ) {
 
-				window.location.hash = '#droomhuis-vandaag/:city';
+				window.location.hash = '#thuis-vandaag/:city';
 
 			} else {
 
@@ -67,12 +68,12 @@ var pushMessage = {
 						var content = {
 							body: "zie meer!",
 							icon: data[0].Foto,
-							link: "/#droomhuis-vandaag/" + _userSettings.city
+							link: "/funda/#thuis-vandaag/" + _userSettings.city
 						};
 						if ( data.length > 1 ) {
-							content.title = "Er zijn vandaag " + data.length + " nieuwe mogelijke droomhuizen toegevoegd in " + _userSettings.city;
+							content.title = "Er zijn vandaag " + data.length + " mogelijke huizen toegevoegd in " + _userSettings.city;
 						} else {
-							content.title = "Er is vandaag 1 nieuw mogelijk droomhuis toegevoegd in " + _userSettings.city;
+							content.title = "Er is vandaag 1 mogelijk thuis toegevoegd in " + _userSettings.city;
 						}
 
 						pushMessage.showNotification(content);
@@ -83,7 +84,7 @@ var pushMessage = {
 
 					var content = {
 						title: "Helaas",
-						body: "Er zijn vandaag geen niewe droomhuizen toegevoegd",
+						body: "Er zijn vandaag geen niewe huizen toegevoegd",
 						icon: "../img/funda.png",
 						link: null
 					};
