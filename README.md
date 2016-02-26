@@ -88,4 +88,12 @@ In main-old.js zijn i.p.v. objecten, constructoren gebruikt. Dit is voor deze el
 ![flow of the app](https://github.com/MartijnNieuwenhuizen/web-app-form-scratch/blob/master/app-route/app-route.png "Flow of the App")
 
 **Assignment 8 - Funda**
-This is the Masterproof of the cources *Css to the Rescue* and *Web App from Scratch*.
+This is a assingment made for Funda.nl. It's a one week prototype which lays a focus on new search methodes.
+
+## Usage
+If you want to run it local:
+* $npm install
+* gulp server
+
+For online usage
+[Online Link](http://martijnnieuwenhuizen.nl/funda/)

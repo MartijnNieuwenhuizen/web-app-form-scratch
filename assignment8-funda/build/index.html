@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+
+<head>
+
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+	<title>Funda</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="Nieuwe zoekfunctie Funda"/>
+	<meta name="keywords" content=""/>
+
+	<link rel="stylesheet" href="./css/style.css"/>
+
+</head>
+
+<body>
+<header>
+	<nav>
+		<ul>
+			<li><a href="/funda/#thuis/city"> <img src="img/funda.png" alt="Funda"> </a></li>
+			<li><a href="/funda/#settings"> <img src="img/settings-white.png" alt="Settings"> </a></li>
+		</ul>
+	</nav>
+</header>
+
+	<main></main>
+
+	<script id="settingsForm" type="text/x-handlebars-template">
+		
+		<h1>Vind uw Thuis</h1>
+		<p>
+			Vind uw Thuis genereerd elke dag een push-bericht met daarin de huizen die onder uw critiria van een Thuis vallen.
+		</p>
+		
+
+		<form action="">
+
+			<input id="city" type="text" placeholder="Plaats, wijk enz" required>
+
+			<span class="radius">
+				+
+				<select id="radius">
+	               	<option value = "5">5km</option>
+	               	<option value = "10">10km</option>
+	               	<option value = "15">15km</option>
+	            	<option value = "20">20km</option>
+	            	<option value = "25">25km</option>
+	            </select>
+	        </span>
+
+			<span class="budget">
+				min
+				<select id="min-price">
+	               	<option value="0">€ 0</option>
+	                    <option value="50000">€ 50.000</option>
+	                    <option value="75000">€ 75.000</option>
+	                    <option value="100000">€ 100.000</option>
+	                    <option value="125000">€ 125.000</option>
+	                    <option selected="" value="150000">€ 150.000</option>
+	                    <option value="175000">€ 175.000</option>
+	                    <option value="200000">€ 200.000</option>
+	                    <option value="225000">€ 225.000</option>
+	                    <option value="250000">€ 250.000</option>
+	                    <option value="275000">€ 275.000</option>
+	                    <option value="300000">€ 300.000</option>
+	                    <option value="325000">€ 325.000</option>
+	                    <option value="350000">€ 350.000</option>
+	                    <option value="375000">€ 375.000</option>
+	                    <option value="400000">€ 400.000</option>
+	                    <option value="450000">€ 450.000</option>
+	                    <option value="500000">€ 500.000</option>
+	                    <option value="550000">€ 550.000</option>
+	                    <option value="600000">€ 600.000</option>
+	                    <option value="650000">€ 650.000</option>
+	                    <option value="700000">€ 700.000</option>
+	                    <option value="750000">€ 750.000</option>
+	                    <option value="800000">€ 800.000</option>
+	                    <option value="900000">€ 900.000</option>
+	                    <option value="1000000">€ 1.000.000</option>
+	                    <option value="1250000">€ 1.250.000</option>
+	                    <option value="1500000">€ 1.500.000</option>
+	                    <option value="2000000">€ 2.000.000</option>
+	            </select>
+			</span>
+			<span class="budget">
+				max
+	            <select id="max-price">
+	                    <option value="0">€ 0</option>
+	                    <option value="50000">€ 50.000</option>
+	                    <option value="75000">€ 75.000</option>
+	                    <option value="100000">€ 100.000</option>
+	                    <option value="125000">€ 125.000</option>
+	                    <option value="150000">€ 150.000</option>
+	                    <option value="175000">€ 175.000</option>
+	                    <option value="200000">€ 200.000</option>
+	                    <option value="225000">€ 225.000</option>
+	                    <option value="250000">€ 250.000</option>
+	                    <option value="275000">€ 275.000</option>
+	                    <option selected="" value="300000">€ 300.000</option>
+	                    <option value="325000">€ 325.000</option>
+	                    <option value="350000">€ 350.000</option>
+	                    <option value="375000">€ 375.000</option>
+	                    <option value="400000">€ 400.000</option>
+	                    <option value="450000">€ 450.000</option>
+	                    <option value="500000">€ 500.000</option>
+	                    <option value="550000">€ 550.000</option>
+	                    <option value="600000">€ 600.000</option>
+	                    <option value="650000">€ 650.000</option>
+	                    <option value="700000">€ 700.000</option>
+	                    <option value="750000">€ 750.000</option>
+	                    <option value="800000">€ 800.000</option>
+	                    <option value="900000">€ 900.000</option>
+	                    <option value="1000000">€ 1.000.000</option>
+	                    <option value="1250000">€ 1.250.000</option>
+	                    <option value="1500000">€ 1.500.000</option>
+	                    <option value="2000000">€ 2.000.000</option>
+	            </select>
+			</span>
+			
+			<div>
+				<input id="notification" type="checkbox">
+				<label for="notification">Push Notifications ontvangen</label>
+			</div>
+
+			<button type="submit" id="submit-button">{{ action }}</button>
+
+		</form>
+
+	</script>
+
+	<script id="new-houses" type="text/x-handlebars-template">
+
+		<section class="your-houses">
+			<h1>Vandaag toegevoegd</h1>
+			<p>
+				En misschien wel wat voor jou!
+			</p>
+
+			<ul class="house-list">
+			{{#each this}}
+			{{#if today }}
+			    <li class="addded-today">
+			{{else}}
+				<li>
+			{{/if}}
+					<a href="{{ URL }}">
+						<span> Aangeboden sinds: <i>{{ AangebodenSindsTekst }}</i></span>
+						<figure>
+							<img src="{{ FotoLargest }}" alt="afbeelding van het huis">
+							<figcaption><span>{{ Adres }}</span> <span>€ {{ Koopprijs }}</span></figcaption>	
+						</figure>
+					</a>
+				</li>
+			{{/each}}
+			</ul>
+		</section>
+
+	</script>
+
+	<script id="houseList" type="text/x-handlebars-template">
+
+		<section class="your-houses">
+			<h1> {{ meta.total }} mogelijke huizen in {{ meta.city }}</h1>
+			<span>Budget: {{ meta.budget }}</span>
+			
+			{{#if meta.budget }}
+
+			    <h2>{{ meta.totalToday }} nieuwe huizen</h2>
+
+			{{else}}
+
+			    <h2>geen nieuwe huizen</h2>
+
+			{{/if}}
+
+			<ul class="house-list">
+			{{#each this.houses}}
+			{{#if today }}
+			    <li class="addded-today">
+			{{else}}
+				<li>
+			{{/if}}
+					<a href="{{ URL }}">
+						<span> Aangeboden sinds: <i>{{ AangebodenSindsTekst }}</i></span>
+						<figure>
+							<img src="{{ FotoLargest }}" alt="afbeelding van het huis">
+							<figcaption><span>{{ Adres }}</span> <span>€ {{ Koopprijs }}</span></figcaption>	
+						</figure>
+					</a>
+				</li>
+			{{/each}}
+			</ul>
+		</section>
+
+	</script>
+
+	<script id="loading" type="text/x-handlebars-template">
+	  	
+	  	<section class="loading">
+	  		<img src="./img/funda.png" alt="funda spinner">
+	  	</section>
+
+	</script>
+
+	<script id="error" type="text/x-handlebars-template">
+	  	
+	  	<section class="errorPage">
+	  		<h1>{{ title }}</h1>
+	  		{{#if message}}
+	  			<p>{{ message }}</p>
+	  		{{/if}}	
+	  	</section>
+
+	</script>
+	
+	<footer>
+
+	</footer>
+	
+	<script src="handlebars-v4.0.5.js"></script>
+	<script src="routie.min.js"></script>
+	<script src="underscore-min.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+
+</html>
