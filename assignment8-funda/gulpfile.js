@@ -53,7 +53,6 @@ gulp.task('js', function() {
 		.pipe(plumber({
 		    errorHandler: config.error
 		}))
-		.pipe(uglify())
 		.pipe(rename(config.js.destFile))
 		.pipe(gulp.dest(config.base + config.js.folder))
 
@@ -68,7 +67,6 @@ gulp.task('browserify', function() {
     	.pipe(browserify({
       	insertGlobals : false
     	}))
-        .pipe(uglify())
         .pipe(gulp.dest(config.base + config.js.folder));
 
 });
@@ -89,7 +87,6 @@ gulp.task('html', function() {
 	
 
 	return gulp.src(config.html.src)
-	.pipe(minifyhtml())
 	.pipe(gulp.dest(config.base))
 
 });

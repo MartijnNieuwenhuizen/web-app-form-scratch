@@ -363,7 +363,7 @@ main section {
 TODAY
 
 */
-.house-list li.addded-today figcaption {
+section ul li.addded-today figcaption {
 	background-color: #3888C5;
 	color: white;
 }
@@ -372,7 +372,7 @@ TODAY
 ALL
 
 */
-.house-list li {
+section ul li {
 	max-width: -webkit-min-content;
 	max-width: -moz-min-content;
 	max-width: min-content;
@@ -382,12 +382,12 @@ ALL
 	font-size: 1.2em; 
 	margin-bottom: 6em;
 }
-.house-list li figcaption {
+section ul li figcaption {
 	background-color: #EDEDED;
 	color: #3888C5;
 	margin-top: -.6em;
 }
-.house-list a {
+section ul a {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -396,7 +396,7 @@ ALL
 	-ms-flex-flow: row wrap;
 	flex-flow: row wrap;
 }
-.house-list img {
+section ul img {
 	max-height: 80vh;
 	max-width: 90vw;
 }
