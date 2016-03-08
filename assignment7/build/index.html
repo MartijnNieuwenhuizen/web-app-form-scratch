@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Single Page Web App</title>
+	<link rel="stylesheet" href="./css/styles.min.css">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+	<header>
+		<a href="">Songs of SoundCloud</a>
+	</header>
+
+	<aside>
+		<nav>
+			<ul>
+				<li><a href="#latest">Latest Songs</a></li>
+				<li><a href="#search">Search</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+
+	<main></main>
+
+	<script id="songs" type="text/x-handlebars-template">
+	  	
+	  	<section class="song-overview">
+			<h1>100 Latest Songs</h1>
+			<ul>
+				{{#each this}}
+					<li class="songs" id="{{ id }}">
+						{{#if artwork_url}}
+							<figure>
+								<img src="{{ artwork_url }}" alt="Artwork">
+							</figure>
+						{{else}}
+							<figure>
+						    	<img src="./img/album.png" alt="placeholder">
+						    </figure>
+						{{/if}}
+						<div>
+							<h2 class="title">{{ title }}</h2>
+							<p><span>Genre:</span> {{ genre }}</p>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+
+		</section>
+
+	</script>
+
+	<script id="search-songs" type="text/x-handlebars-template">
+
+		<div class="wrapper">
+		  	<section class="song-overview">
+				<h1>Search Results</h1>
+				<ul>
+					{{#each this}}
+						<li class="songs" id="{{ id }}">
+							{{#if artwork_url}}
+								<figure>
+									<img src="{{ artwork_url }}" alt="Artwork">
+								</figure>
+							{{else}}
+								<figure>
+							    	<img src="./img/album.png" alt="placeholder">
+							    </figure>
+							{{/if}}
+							<div>
+								<h2 class="title">{{ title }}</h2>
+								<p><span>Genre:</span> {{ genre }}</p>
+							</div>
+						</li>
+					{{/each}}
+				</ul>
+			</section>
+		</div>
+
+	</script>
+
+	<script id="detail" type="text/x-handlebars-template">
+	  	
+	  	<section class="song-detail" id="{{ id }}">
+			{{#if artwork_url}}
+				<figure>
+					<img src="{{ artwork_url }}" alt="Artwork">
+				</figure>
+			{{else}}
+				<figure>
+			    	<img src="img/album.png" alt="placeholder">
+			    </figure>
+			{{/if}}
+			<section>
+				<h2 class="title">{{ title }}</h2>
+				<p><span>Genre:</span> {{ genre }}</p>
+			</section>
+			<div>
+				{{#if stream_url}}
+					<p>{{ description }}</p>
+				{{/if}}
+				{{#if stream_url}}
+					<span>{{ stream_url }}</span>
+				{{/if}}
+			</div>
+		</section>
+
+	</script>
+
+	<script id="search" type="text/x-handlebars-template">
+
+		<section id="searchForm">
+			<form action="">
+				<label for="song">Search a Song:</label>
+				<input type="text" id="song" required="true">
+
+				<button id="submit">Search</button>
+			</form>
+		</section>
+
+	</script>
+
+	<script id="error" type="text/x-handlebars-template">
+	  	
+	  	<section class="errorPage">
+	  		<h1>{{ title }}</h1>
+	  		{{#if message}}
+	  			<p>{{ message }}</p>
+	  		{{/if}}	
+	  	</section>
+
+	</script>
+
+	<script id="loading" type="text/x-handlebars-template">
+	  	
+	  	<section class="loading">
+	  		<img src="./img/spinner.gif" alt="">
+	  	</section>
+
+	</script>
+	
+	<script src="./src/js/lib/nanoajax.min.js"></script>
+	<script src="./src/js/lib/routie.min.js"></script>
+	<script src="./src/js/lib/handlebars-v4.0.5.js"></script>
+	<script src="./src/js/lib/underscore-min.js"></script>
+	<script src="./src/js/lib/hammerjs.min.js"></script>
+	<script src="./js/main.js"></script>
+
+</body>
+</html>

@@ -49,25 +49,27 @@ gulp.task('misc:copy', function() {
 
 gulp.task('js', function() {
 
-    return gulp.src(config.js.src)
-        .pipe(plumber({
-            errorHandler: config.error
-        }))
-        .pipe(gulp.dest(config.base + config.js.folder));
+	return gulp.src(config.js.src)
+		.pipe(plumber({
+		    errorHandler: config.error
+		}))
+		.pipe(uglify())
+		.pipe(rename(config.js.destFile))
+		.pipe(gulp.dest(config.base + config.js.folder))
 
 });
 
 gulp.task('browserify', function() {
     	
-   	return gulp.src('./src/js/main.js')
+   	return gulp.src(config.js.src)
    		.pipe(plumber({
              errorHandler: config.error
-         }))
-        	.pipe(browserify({
-          	insertGlobals : false
-        	}))
-         .pipe(uglify())
-        	.pipe(gulp.dest(config.base + config.js.folder));
+        }))
+    	.pipe(browserify({
+      	insertGlobals : false
+    	}))
+        .pipe(uglify())
+        .pipe(gulp.dest(config.base + config.js.folder));
 
 });
 
