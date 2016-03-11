@@ -1,0 +1,16 @@
+# Single Page Application
+Een Single Page Application is een snelle manier om een applicatie te maken die op alle devices werkt. Hieraan zitten wel wat moeilijkheden/nadelen, maar natuurlijk ook voordelen.
+
+## Nadelen
+Omdat je een applicatie maakt die op meerdere devices goed moet werken(iOS) kan het lastig zijn om een goede SEO te behouden, maar hoe doe je dat? Volgens Horwood moet je je content die Google moet indexeren aan de top van je applicatie zetten (je branding content), de content die daar niet staat zou niet relevant moeten zijn voor je vindbaarheid (Horwood). Een iOS app wordt immers niet geindexeerd door Google.
+
+Je moet ook rekening houden dat je met een Single Page Application (SPA) de browser standaarden die je niet wilt overschrijven, overschrijft. Voorbeelden kunnen zijn die back/foreward-button van je browser en je zoekgeschidenis. Omdat de content veranderd en er geen nieuwe pagina wordt geladen werken deze functies niet meer. Hou dit goed in je achterhooft wanneer je een SPA besluit te maken (Tilkov). Dit is alleen wanneer je SPA niet goed is gebouwd!
+
+## Voordelen
+Er zijn natuurlijk ook voor delen aan een SPA. De architectuur is, mits goed gebouwd, erg duidelijk. Hierin kan je het argument opgooien dat je de architectuur van het framework gebruikt i.p.v. de perfecte architectuur, maar wij gebruiken geen framework. Daarnaast is over de structuur van een framework goed nagedacht en wordt dit constant doorontwikkeld. 
+Maar terug naar de voordelen, omdat alles modulair gebrouwd wordt is het mogenlijk elk onderdeel van je app appart te cross-browser testen. Dit betekend dat elk onderdeel van je app los werkt en het testen sneller is gebeurd. Ook kan je deze onderdelen makkelijk hergebruiken (Tilkov). 
+
+## bronvermelding
+Horwood, H. (2015). Single-Page Applications: Building a Web Stack That Works. Geraadpleegd op 01-02-2016, van https://medium.com/@keithwhor/how-to-build-a-single-page-application-web-stack-that-works-the-baa-architecture-25c1ad941097#.9mh4nrstx
+
+Tilkov, S.(2013). Why I hate your Single Page App. Geraadpleegd op 01-02-2016, van https://medium.com/@stilkov/why-i-hate-your-single-page-app-f08bb4ff9134#.ehltv7lsk
